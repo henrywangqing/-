@@ -1,0 +1,6 @@
+framework module Pods_EsimS {
+  umbrella header "Pods-EsimS-umbrella.h"
+
+  export *
+  module * { export * }
+}
