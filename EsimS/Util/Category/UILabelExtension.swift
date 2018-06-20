@@ -48,7 +48,7 @@ extension UILabel {
         for i in 0 ..< texts.count {
             
             attTxt.addAttribute(.foregroundColor, value: colors[i], range: totalTxt.range(of: texts[i]))
-        }
+        }  
         
         self.attributedText = attTxt
         

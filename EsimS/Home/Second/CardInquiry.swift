@@ -86,7 +86,5 @@ class CardInquiry: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
-    
-    
-
+       
 }

@@ -53,7 +53,7 @@ class FirstVc: BaseVc {
         
         let subheadLbl = UILabel(frame: CGRect(x: 10, y: 10 + headLbl.frame.maxY, width: 300, height: 25))
         subheadLbl.font = UIFont.systemFont(ofSize: 15)
-        subheadLbl.setTextColors(["流量卡总计：","100","张"], [KColor(0, 0, 0, 0.8), KBlueColor, KColor(0, 0, 0, 0.8)])
+        subheadLbl.setTextColors(["流量卡总计：","100","张"], [KColor(0, 0, 0, 0.8), UIColor.red, KColor(0, 0, 0, 0.8)])
         scrollView.addSubview(subheadLbl)
         
         var b = Business()

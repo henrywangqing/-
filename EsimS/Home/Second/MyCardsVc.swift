@@ -41,7 +41,7 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Mystring("续费清单")
+        title = Mystring("我的卡片")
         
         setUpData()
         
@@ -77,7 +77,7 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 50, y: 0, width: 100, height: 40), color: KOrangeColor, fontsize: 14)
+        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 50, y: 0, width: 100, height: 40), color: UIColor.red, fontsize: 14)
         pageView.addSubview(pageLbl)
         
         refreshPages()

@@ -8,7 +8,8 @@
 
 import UIKit
 import SVProgressHUD
-class ConfirmPaymentVc: BaseVc {
+class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
+    var paymentResultView: PaymentResultView!
     
     var month: Int = 0
      
@@ -221,11 +222,22 @@ class ConfirmPaymentVc: BaseVc {
             
         }
         
-        let alert = UIAlertController(style: .alert, title: "您已续费成功", titleA: "确定", colorA: KBlueColor, handlerA: { [weak self] (UIAlertAction) in
-            self!.navigationController?.popToRootViewController(animated: true)
-        })
-        self.present(alert, animated: true, completion: nil)
+        paymentResultView = PaymentResultView(frame: UIScreen.main.bounds, result: .success)
+        paymentResultView.showView()
+        paymentResultView.delegate = self
         
+    }
+    
+    func paymentResultViewClicked(_ result: KPaymentResult) {
+        switch result {
+        case .success:
+            paymentResultView.hideView()
+            navigationController?.popToRootViewController(animated: true)
+            break
+        case .failure:
+            paymentResultView.hideView()
+            break
+        }
     }
 }
 

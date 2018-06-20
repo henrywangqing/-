@@ -77,7 +77,7 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
         }
         
         
-        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 60, y: 0, width: 120, height: 40), color: KOrangeColor, fontsize: 14)
+        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 60, y: 0, width: 120, height: 40), color: UIColor.red, fontsize: 14)
         pageView.addSubview(pageLbl)
         
         refreshPages()
@@ -166,18 +166,19 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
     
     @objc func pageBtnClicked(_ btn:UIButton) {
         SVProgressHUD.show(withStatus: "刷新中...")
-        if btn == pageBtn1 {
-            page -= 1
-        }else {
-            page += 1
-        }
-        refreshPages()
         
-        APITool.request(target: .inquiryCard(simNoList: simList, sim_type: 0, month: month, pageNumber: page, pageSize: 10), success: { [weak self] (result) in
+        APITool.request(target: .inquiryCard(simNoList: simList, sim_type: 0, month: month, pageNumber: btn == pageBtn1 ? page - 1 : page + 1, pageSize: 10), success: { [weak self] (result) in
             print("结果",result)
              
             if let chargeList = result["chargeList"] as? [NSDictionary] {
                 self!.dealWithResult(chargeList: chargeList)
+                
+                if btn == self!.pageBtn1 {
+                    self!.page -= 1
+                }else {
+                    self!.page += 1
+                }
+                self!.refreshPages()
                 
             }
             
@@ -218,6 +219,34 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
         }
         
     }
+//    MARK: tableviewdelegate
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        simList.remove(at: (page - 1) * 10 + indexPath.row)
+        
+        SVProgressHUD.show(withStatus: "刷新中...")
+        
+        APITool.request(target: .inquiryCard(simNoList: simList, sim_type: 0, month: month, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
+            print("结果",result)
+            
+            if let chargeList = result["chargeList"] as? [NSDictionary] {
+                self!.dealWithResult(chargeList: chargeList)
+                
+                self!.page = 1
+                self!.refreshPages()
+                
+            }
+            
+        }) { (error) in
+            print(error)
+            
+        }
+        
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chargeList.count
     }

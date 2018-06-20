@@ -13,9 +13,9 @@ class MyOrdersVc: BaseVc {
     var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "订单列表"
     }
+    
 
     func setUpTableView() {
         tableView = UITableView(frame: view.bounds, style: .grouped)

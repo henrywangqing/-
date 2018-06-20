@@ -126,7 +126,7 @@ class AddRenewListVc: BaseVc, UITextViewDelegate, UIScrollViewDelegate {
         seg = UISegmentedControl(items: [Mystring("ICCID"), Mystring("imsi")])
         seg.frame = CGRect(x: scrollView.width/2.0 - 100, y: 10, width: 200, height: 30)
         seg.selectedSegmentIndex = 0
-        seg.tintColor = KOrangeColor
+        seg.tintColor = UIColor.red
         scrollView.addSubview(seg)
     }
     

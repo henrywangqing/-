@@ -12,6 +12,7 @@ class DiagramView: UIView {
     
     var backView: UIView!
     var business: Business!
+    let lineW:CGFloat = 1
     let space: CGFloat = 10
     let blockW: CGFloat = 15
     let backW: CGFloat = 280
@@ -83,8 +84,9 @@ class DiagramView: UIView {
         }
     }
     func drawDiagram() {
+        let lineAngle = lineW / (backH * .pi) * .pi * 2
         for i in 0 ..< startArr.count {
-            drawSector(startAngle: startArr[i] * .pi * 2 - .pi/2.0, endAngle: endArr[i] * .pi * 2 - .pi/2.0, radius: backH/2.0, color: colors[i])
+            drawSector(startAngle: startArr[i] * .pi * 2 - .pi/2.0 + lineAngle, endAngle: endArr[i] * .pi * 2 - .pi/2.0 - lineAngle, radius: backH/2.0, color: colors[i])
         }
         
         drawSector(startAngle: 0, endAngle: .pi * 2, radius: backH/2.0 - 30, color: UIColor.white)
@@ -100,10 +102,10 @@ class DiagramView: UIView {
         path.move(to: CGPoint(x: backH/2.0, y: backH/2.0))
         path.addArc(withCenter: CGPoint(x: backH/2.0, y: backH/2.0), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         sectorLayer.path = path.cgPath
-        sectorLayer.lineWidth = 2
+        sectorLayer.lineWidth = lineW
         sectorLayer.strokeColor = UIColor.white.cgColor
         sectorLayer.fillColor = color.cgColor
-        
+      
     }
 }
 

@@ -12,6 +12,20 @@
 		4303061120C4DC7E00FBFDB0 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4303061020C4DC7E00FBFDB0 /* UIButtonExtension.swift */; };
 		4303061320C52AF000FBFDB0 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4303061220C52AF000FBFDB0 /* UITextFieldExtension.swift */; };
 		4303061520C6658900FBFDB0 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4303061420C6658900FBFDB0 /* UIAlertControllerExtension.swift */; };
+		4306EE6120D8B02900A97ED0 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4306EE5F20D8B02900A97ED0 /* AlipaySDK.bundle */; };
+		4306EE6220D8B02900A97ED0 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6020D8B02900A97ED0 /* AlipaySDK.framework */; };
+		4306EE6420D8B1E800A97ED0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6320D8B1E800A97ED0 /* libc++.tbd */; };
+		4306EE6620D8B1F400A97ED0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6520D8B1F400A97ED0 /* libz.tbd */; };
+		4306EE6820D8B1FF00A97ED0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6720D8B1FF00A97ED0 /* SystemConfiguration.framework */; };
+		4306EE6A20D8B20800A97ED0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6920D8B20800A97ED0 /* CoreTelephony.framework */; };
+		4306EE6C20D8B21200A97ED0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6B20D8B21200A97ED0 /* QuartzCore.framework */; };
+		4306EE6E20D8B21B00A97ED0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6D20D8B21B00A97ED0 /* CoreText.framework */; };
+		4306EE7020D8B22600A97ED0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE6F20D8B22600A97ED0 /* CoreGraphics.framework */; };
+		4306EE7220D8B23F00A97ED0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE7120D8B23F00A97ED0 /* CFNetwork.framework */; };
+		4306EE7420D8B24600A97ED0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4306EE7320D8B24600A97ED0 /* CoreMotion.framework */; };
+		4306EE7720D8E3E500A97ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD220A02FD60020345D /* Assets.xcassets */; };
+		4306EE7920D8E55C00A97ED0 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 4306EE7820D8E55C00A97ED0 /* launch.png */; };
+		430872A820D3B51700AD375F /* PaymentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430872A720D3B51700AD375F /* PaymentResultView.swift */; };
 		4309AEE620C7BB1100EC81F3 /* CardInquiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309AEE520C7BB1100EC81F3 /* CardInquiry.swift */; };
 		4309AEFB20C7E7B200EC81F3 /* CardManagementVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309AEFA20C7E7B200EC81F3 /* CardManagementVc.swift */; };
 		4309AEFE20C8DFB300EC81F3 /* MyCardsVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309AEFD20C8DFB300EC81F3 /* MyCardsVc.swift */; };
@@ -59,7 +73,6 @@
 		43358FAC20A191FE00ED07EA /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43358FAA20A191FE00ED07EA /* LaunchScreen.strings */; };
 		4354E5B720CE1A6D0064D0FC /* AccountVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354E5B620CE1A6D0064D0FC /* AccountVc.swift */; };
 		439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1ACB20A02FD50020345D /* AppDelegate.swift */; };
-		439C1AD320A02FD60020345D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD220A02FD60020345D /* Assets.xcassets */; };
 		439C1AD620A02FD60020345D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD420A02FD60020345D /* LaunchScreen.storyboard */; };
 		439C1AE120A02FD60020345D /* EsimSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1AE020A02FD60020345D /* EsimSTests.swift */; };
 		439C1AEC20A02FD60020345D /* EsimSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1AEB20A02FD60020345D /* EsimSUITests.swift */; };
@@ -74,7 +87,6 @@
 		43B0B66920CF9EBE0071A7B1 /* NSStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66820CF9EBE0071A7B1 /* NSStringExtension.swift */; };
 		43B0B66B20D0FF830071A7B1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66A20D0FF830071A7B1 /* Order.swift */; };
 		43B0B66D20D1003C0071A7B1 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66C20D1003C0071A7B1 /* OrderDetail.swift */; };
-		43B0B66F20D10F520071A7B1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B0B66E20D10F520071A7B1 /* logo.png */; };
 		43B0B67120D239990071A7B1 /* FirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B67020D239990071A7B1 /* FirstPage.swift */; };
 		43B0B67320D239F60071A7B1 /* CarrierDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B67220D239F60071A7B1 /* CarrierDiagram.swift */; };
 		43E40FFC20BD3F610034917B /* CardListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E40FFB20BD3F610034917B /* CardListVc.swift */; };
@@ -105,6 +117,19 @@
 		4303061020C4DC7E00FBFDB0 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		4303061220C52AF000FBFDB0 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		4303061420C6658900FBFDB0 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		4306EE5F20D8B02900A97ED0 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		4306EE6020D8B02900A97ED0 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		4306EE6320D8B1E800A97ED0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4306EE6520D8B1F400A97ED0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4306EE6720D8B1FF00A97ED0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4306EE6920D8B20800A97ED0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4306EE6B20D8B21200A97ED0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4306EE6D20D8B21B00A97ED0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		4306EE6F20D8B22600A97ED0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4306EE7120D8B23F00A97ED0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4306EE7320D8B24600A97ED0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		4306EE7820D8E55C00A97ED0 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		430872A720D3B51700AD375F /* PaymentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultView.swift; sourceTree = "<group>"; };
 		4309AEE520C7BB1100EC81F3 /* CardInquiry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInquiry.swift; sourceTree = "<group>"; };
 		4309AEE820C7C25C00EC81F3 /* EsimS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EsimS-Bridging-Header.h"; sourceTree = "<group>"; };
 		4309AEFA20C7E7B200EC81F3 /* CardManagementVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementVc.swift; sourceTree = "<group>"; };
@@ -176,7 +201,6 @@
 		43B0B66820CF9EBE0071A7B1 /* NSStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringExtension.swift; sourceTree = "<group>"; };
 		43B0B66A20D0FF830071A7B1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		43B0B66C20D1003C0071A7B1 /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
-		43B0B66E20D10F520071A7B1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		43B0B67020D239990071A7B1 /* FirstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPage.swift; sourceTree = "<group>"; };
 		43B0B67220D239F60071A7B1 /* CarrierDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierDiagram.swift; sourceTree = "<group>"; };
 		43E40FFB20BD3F610034917B /* CardListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListVc.swift; sourceTree = "<group>"; };
@@ -193,7 +217,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4306EE7420D8B24600A97ED0 /* CoreMotion.framework in Frameworks */,
+				4306EE7220D8B23F00A97ED0 /* CFNetwork.framework in Frameworks */,
+				4306EE7020D8B22600A97ED0 /* CoreGraphics.framework in Frameworks */,
+				4306EE6E20D8B21B00A97ED0 /* CoreText.framework in Frameworks */,
+				4306EE6C20D8B21200A97ED0 /* QuartzCore.framework in Frameworks */,
+				4306EE6A20D8B20800A97ED0 /* CoreTelephony.framework in Frameworks */,
+				4306EE6820D8B1FF00A97ED0 /* SystemConfiguration.framework in Frameworks */,
+				4306EE6620D8B1F400A97ED0 /* libz.tbd in Frameworks */,
+				4306EE6420D8B1E800A97ED0 /* libc++.tbd in Frameworks */,
 				0C337451431127C65E6F6A26 /* Pods_EsimS.framework in Frameworks */,
+				4306EE6220D8B02900A97ED0 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +255,15 @@
 				B4F957C9D83DF124D5D28814 /* Pods-EsimS.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4306EE5E20D8B01200A97ED0 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				4306EE5F20D8B02900A97ED0 /* AlipaySDK.bundle */,
+				4306EE6020D8B02900A97ED0 /* AlipaySDK.framework */,
+			);
+			path = Libs;
 			sourceTree = "<group>";
 		};
 		4309EF3320A92A8800BBEB03 /* Manager */ = {
@@ -262,6 +305,7 @@
 				4309EF6720AFD01200BBEB03 /* PlanDetailCell.swift */,
 				43009F1E20D359FD001607B1 /* DiagramView.swift */,
 				432A8D8420C2660900EA66F0 /* PaymentConfirmView.swift */,
+				430872A720D3B51700AD375F /* PaymentResultView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -304,7 +348,6 @@
 		43358F7320A1465300ED07EA /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				43B0B66E20D10F520071A7B1 /* logo.png */,
 				43B0B66120CE51950071A7B1 /* TabBar */,
 				43B0B65220CE51750071A7B1 /* 服务 */,
 				4309EF4E20AC377200BBEB03 /* countryPic.bundle */,
@@ -333,6 +376,7 @@
 		439C1ABF20A02FD40020345D = {
 			isa = PBXGroup;
 			children = (
+				4306EE5E20D8B01200A97ED0 /* Libs */,
 				439C1ACA20A02FD50020345D /* EsimS */,
 				439C1ADF20A02FD60020345D /* EsimSTests */,
 				439C1AEA20A02FD60020345D /* EsimSUITests */,
@@ -355,6 +399,7 @@
 		439C1ACA20A02FD50020345D /* EsimS */ = {
 			isa = PBXGroup;
 			children = (
+				4306EE7820D8E55C00A97ED0 /* launch.png */,
 				43FD36D620A2E00700272D36 /* Language */,
 				43FD36D520A2DFE700272D36 /* Others */,
 				43FD36D120A2DEA300272D36 /* Util */,
@@ -506,6 +551,15 @@
 		CF9DC29671457E38495EBDC7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4306EE7320D8B24600A97ED0 /* CoreMotion.framework */,
+				4306EE7120D8B23F00A97ED0 /* CFNetwork.framework */,
+				4306EE6F20D8B22600A97ED0 /* CoreGraphics.framework */,
+				4306EE6D20D8B21B00A97ED0 /* CoreText.framework */,
+				4306EE6B20D8B21200A97ED0 /* QuartzCore.framework */,
+				4306EE6920D8B20800A97ED0 /* CoreTelephony.framework */,
+				4306EE6720D8B1FF00A97ED0 /* SystemConfiguration.framework */,
+				4306EE6520D8B1F400A97ED0 /* libz.tbd */,
+				4306EE6320D8B1E800A97ED0 /* libc++.tbd */,
 				B356F49A0CDC12A662B3F18F /* Pods_EsimS.framework */,
 			);
 			name = Frameworks;
@@ -623,21 +677,22 @@
 				43B0B65F20CE51760071A7B1 /* 卡片续费@2x.png in Resources */,
 				43358F8320A1488500ED07EA /* 我的选中@2x.png in Resources */,
 				43358FA820A1910B00ED07EA /* LaunchScreen.strings in Resources */,
+				4306EE7720D8E3E500A97ED0 /* Assets.xcassets in Resources */,
 				43B0B65B20CE51760071A7B1 /* 常见问题@2x.png in Resources */,
+				4306EE7920D8E55C00A97ED0 /* launch.png in Resources */,
 				4309AF0620CA84CD00EC81F3 /* 总览@2x.png in Resources */,
 				43B0B65A20CE51760071A7B1 /* 我的订单@2x.png in Resources */,
 				43358F7D20A1465400ED07EA /* 服务@2x.png in Resources */,
 				4309AF0220CA841800EC81F3 /* 设置@2x.png in Resources */,
 				43358F9420A18DAE00ED07EA /* Localizable.strings in Resources */,
 				43358FAC20A191FE00ED07EA /* LaunchScreen.strings in Resources */,
-				43B0B66F20D10F520071A7B1 /* logo.png in Resources */,
+				4306EE6120D8B02900A97ED0 /* AlipaySDK.bundle in Resources */,
 				43358F8220A1488500ED07EA /* 我的@2x.png in Resources */,
 				4309AF0820CA873800EC81F3 /* 商城@2x.png in Resources */,
 				439C1AD620A02FD60020345D /* LaunchScreen.storyboard in Resources */,
 				43B0B65D20CE51760071A7B1 /* 我的消息@2x.png in Resources */,
 				4309EF4F20AC377200BBEB03 /* countryPic.bundle in Resources */,
 				43B0B65C20CE51760071A7B1 /* 提交工单@2x.png in Resources */,
-				439C1AD320A02FD60020345D /* Assets.xcassets in Resources */,
 				43B0B65E20CE51760071A7B1 /* 卡片列表@2x.png in Resources */,
 				43B0B66020CE51760071A7B1 /* 单卡查询@2x.png in Resources */,
 			);
@@ -747,6 +802,7 @@
 				4303061120C4DC7E00FBFDB0 /* UIButtonExtension.swift in Sources */,
 				432A8D8520C2660900EA66F0 /* PaymentConfirmView.swift in Sources */,
 				43B0B67320D239F60071A7B1 /* CarrierDiagram.swift in Sources */,
+				430872A820D3B51700AD375F /* PaymentResultView.swift in Sources */,
 				430CFA1220A3F2C200D7A1FF /* ChooseCountryVc.swift in Sources */,
 				4303061520C6658900FBFDB0 /* UIAlertControllerExtension.swift in Sources */,
 				430CFA1B20A4537900D7A1FF /* API.swift in Sources */,
@@ -967,6 +1023,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48HYE63JX9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				INFOPLIST_FILE = EsimS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -990,6 +1050,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48HYE63JX9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				INFOPLIST_FILE = EsimS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (

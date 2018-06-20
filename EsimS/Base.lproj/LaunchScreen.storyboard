@@ -18,16 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-kK-rLb">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="jlW-bJ-oO5">
+                                <rect key="frame" x="147" y="273.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="4VJ-Ff-vab"/>
+                                    <constraint firstAttribute="height" constant="80" id="Gif-WX-3Ro"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Ol8-kK-rLb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0nD-Yf-Byv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ol8-kK-rLb" secondAttribute="trailing" id="2Yr-Jt-0lX"/>
-                            <constraint firstItem="Ol8-kK-rLb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YXX-ow-iBG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ol8-kK-rLb" secondAttribute="bottom" id="dpw-Ub-CUP"/>
+                            <constraint firstItem="jlW-bJ-oO5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-30" id="Diy-8g-OER"/>
+                            <constraint firstItem="jlW-bJ-oO5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="rvm-H9-T0c"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="375" height="672"/>
+        <image name="launch.png" width="300" height="300"/>
     </resources>
 </document>
