@@ -61,8 +61,8 @@ class FirstVc: BaseVc {
         b.total = 100
         b.inUse = 20
         b.unknown = 20
-        b.silent = 20
-        b.test = 20
+        b.silent = 26
+        b.test = 14
         b.outage = 20
         let diagramView1 = DiagramView(frame: CGRect(x: 10, y: subheadLbl.frame.maxY + 5, width: scrollView.width - 20, height: 200), business:b)
         

@@ -23,6 +23,7 @@ class DiagramView: UIView {
                   KColor(80, 83, 101, 1),
                   KColor(0, 154, 255, 1),
                   KColor(195, 211, 165, 1)]
+    var sectorColors = [UIColor]()
     var startArr = [CGFloat]()
     var endArr = [CGFloat]()
     var valueArr = [CGFloat]()
@@ -41,18 +42,54 @@ class DiagramView: UIView {
     
     func setUpData() {
         valueArr = [CGFloat(business.inUse),CGFloat(business.outage),CGFloat(business.unknown),CGFloat(business.silent),CGFloat(business.test)]
-        
+        print(valueArr)
         for i in 0 ..< 5 {
             var temp: CGFloat = 0
-            for _ in 0 ..< i {
-                temp += valueArr[i]/CGFloat(business.total)
+           
+            for j in 0 ..< i {
+                
+                temp += valueArr[j]/CGFloat(business.total)
             }
+            
             startArr.append(temp)
         }
         
         endArr = startArr
         endArr.remove(at: 0)
         endArr.append(1)
+        sectorColors = colors
+        
+        print(startArr, endArr)
+        
+        let lineAngle = lineW / (backH * .pi)
+        
+        var emptyIndexArr = [Int]()
+        for i in 0 ..< startArr.count {
+            
+            if startArr[i] == endArr[i] {
+                emptyIndexArr.append(i)
+            }
+        }
+        emptyIndexArr.reverse()
+        
+        for index in emptyIndexArr {
+            startArr.remove(at: index)
+            endArr.remove(at: index)
+            sectorColors.remove(at: index)
+        }
+        
+        print(startArr, endArr)
+        let totalRate = 1 - CGFloat(startArr.count) * lineAngle * 2
+        
+        for i in 0 ..< startArr.count {
+            
+            startArr[i] = startArr[i] * totalRate + lineAngle * (2 * CGFloat(i) + 1)
+            
+            endArr[i] = endArr[i] * totalRate + lineAngle * (2 * CGFloat(i) + 1)
+ 
+        }
+        
+        print(startArr, endArr)
     }
     func setUpSubviews() {
         backView = UIView(frame: CGRect(x: width/2.0 - backW/2.0, y: height/2.0 - backH/2.0 - 10, width: backW, height: backH))
@@ -71,7 +108,7 @@ class DiagramView: UIView {
         
         backView.addSubview(headLbl)
         
-        for i in 0 ..< startArr.count {
+        for i in 0 ..< valueArr.count {
             let colorView = UIView(frame: CGRect(x: headLbl.x, y: headLbl.frame.maxY + (5 + blockW) * CGFloat(i), width: blockW, height: blockW))
             colorView.backgroundColor = colors[i]
             backView.addSubview(colorView)
@@ -84,9 +121,11 @@ class DiagramView: UIView {
         }
     }
     func drawDiagram() {
-        let lineAngle = lineW / (backH * .pi) * .pi * 2
+        
         for i in 0 ..< startArr.count {
-            drawSector(startAngle: startArr[i] * .pi * 2 - .pi/2.0 + lineAngle, endAngle: endArr[i] * .pi * 2 - .pi/2.0 - lineAngle, radius: backH/2.0, color: colors[i])
+            
+            drawSector(startAngle: startArr[i] * .pi * 2 - .pi/2.0, endAngle: endArr[i] * .pi * 2 - .pi/2.0, radius: backH/2.0, color: sectorColors[i])
+            
         }
         
         drawSector(startAngle: 0, endAngle: .pi * 2, radius: backH/2.0 - 30, color: UIColor.white)
