@@ -214,7 +214,7 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
         
         SVProgressHUD.show(withStatus: "支付中...")
         APITool.request(target: .confirmOrder(simNoList: simList, sim_type: 1, month: month, order_no: order.order_no, sum_fee: sum, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
-            print("结果",result)
+            print("结果DSA",result)
             
             
         }) { (error) in
