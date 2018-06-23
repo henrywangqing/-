@@ -8,28 +8,30 @@
 
 import UIKit
 
-enum KPaymentResult {
+enum KPaymentState {
     case success
     case failure
 }
 
 protocol PaymentResultViewDelegate: NSObjectProtocol {
-    func paymentResultViewClicked(_ result: KPaymentResult)
+    func paymentResultViewClicked(_ paymentState: KPaymentState)
 }
 
 class PaymentResultView: UIView {
     let whiteViewH: CGFloat = KHeight - 100
     var whiteView: UIView!
-    var result: KPaymentResult!
+    var paymentState: KPaymentState!
+    var resultString: String!
     weak var delegate: PaymentResultViewDelegate?
  
-    init(frame: CGRect, result: KPaymentResult) {
+    init(frame: CGRect, paymentState: KPaymentState, resultString: String) {
         super.init(frame: frame)
-        self.result = result
-        setUpSubviews(result: result)
+        self.paymentState = paymentState
+        self.resultString = resultString
+        setUpSubviews(paymentState: paymentState)
     }
     
-    func setUpSubviews(result: KPaymentResult) {
+    func setUpSubviews(paymentState: KPaymentState) {
         backgroundColor = KColor(0, 0, 0, 0.3)
         
         whiteView = UIView(frame: CGRect(x: 20, y: -whiteViewH, width: KWidth - 40, height: whiteViewH))
@@ -37,7 +39,8 @@ class PaymentResultView: UIView {
         whiteView.layer.cornerRadius = 5
         addSubview(whiteView)
         
-        let lbl = UILabel(frame: CGRect(x: 0, y: whiteViewH/2.0 - 50, width: whiteView.width, height: 25), color: UIColor.black, alignment: .center, fontsize: 16, text:  result == .success ? "您已支付成功！" : "支付失败！")
+        let lbl = UILabel(frame: CGRect(x: 0, y: whiteViewH/2.0 - 50, width: whiteView.width, height: 25), color: UIColor.black, alignment: .center, fontsize: 16, text:  resultString)
+       
         whiteView.addSubview(lbl)
         
         let btn = UIButton(frame: CGRect(x: whiteView.width/2.0 - 60, y: whiteViewH - 80, width: 120, height: 30), title: "确定", titleColor: KBlueColor, fontsize: 14, target: self, selector: #selector(btnClicked))
@@ -48,7 +51,7 @@ class PaymentResultView: UIView {
     }
     @objc func btnClicked() {
         if delegate != nil {
-            delegate!.paymentResultViewClicked(result)
+            delegate!.paymentResultViewClicked(paymentState)
             
         }
     }

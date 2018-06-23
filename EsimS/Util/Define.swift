@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+ 
 let KStatusBarH = UIApplication.shared.statusBarFrame.height
 
 let KBackgroundColor = KColor(239, 239, 244, 1)
@@ -15,9 +15,9 @@ let KOrangeColor = KColor(255, 105, 38, 1)
 let KBlueColor = KColor(11, 106, 255, 1)
 let KHeight = UIScreen.main.bounds.height
 let KWidth = UIScreen.main.bounds.width
- 
-let AliPayAppID = "2018052260205188"
 
+let AliPayAppID = "2018052260205188"
+ 
 func randomColor() -> UIColor {
     return KColor(CGFloat(arc4random()%255),CGFloat(arc4random()%255), CGFloat(arc4random()%255), 1)
 }

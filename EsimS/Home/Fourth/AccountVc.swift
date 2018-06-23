@@ -37,7 +37,12 @@ class AccountVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedSectionHeaderHeight = 20
         tableView.estimatedSectionFooterHeight = 1
         view.addSubview(tableView)
-    }}
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+}
 
 
 

@@ -96,6 +96,11 @@ class FourthVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         DataManager.destroyCurrentUserID()
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: LoginVc())
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 }
 
 

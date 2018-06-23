@@ -62,10 +62,7 @@ class ChooseCountryVc: BaseVc, UISearchBarDelegate, UITableViewDelegate, UITable
         if searchBar.isFirstResponder {
             view.endEditing(true)
         } else {
-            
-            let detailVc = ChoosePlanVc()
-            detailVc.country = dataSource[indexPath.section][indexPath.row]
-            navigationController?.pushViewController(detailVc, animated: true)
+             
         }
     }
 //    MARK:uitableViewDataSource

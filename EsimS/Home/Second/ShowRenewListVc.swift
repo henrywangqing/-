@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SVProgressHUD
-
-class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, PaymentConfirmViewDelegate {
+ 
+class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
     let offsetH:CGFloat = 200
     
@@ -19,7 +18,7 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
     
     var footerView: UIView!
     
-    var chargeList = [SimCard]()
+    var chargeList = [Card]()
     
     var simList = [Int]()
     
@@ -165,12 +164,13 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
     }
     
     @objc func pageBtnClicked(_ btn:UIButton) {
-        SVProgressHUD.show(withStatus: "刷新中...")
+        ProgressHUD.show(withStatus: "刷新中...")
         
-        APITool.request(target: .inquiryCard(simNoList: simList, sim_type: 0, month: month, pageNumber: btn == pageBtn1 ? page - 1 : page + 1, pageSize: 10), success: { [weak self] (result) in
+        APITool.request(target: .getRenewedCardInfo(simNoList: simList, sim_type: 0, month: month, pageNumber: btn == pageBtn1 ? page - 1 : page + 1, pageSize: 10), success: { [weak self] (result) in
             print("结果",result)
              
-            if let chargeList = result["chargeList"] as? [NSDictionary] {
+            if let resultDict = result as? NSDictionary,
+               let chargeList = resultDict["chargeList"] as? [NSDictionary] {
                 self!.dealWithResult(chargeList: chargeList)
                 
                 if btn == self!.pageBtn1 {
@@ -188,10 +188,10 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
         }
     }
     func dealWithResult(chargeList: [NSDictionary]) {
-        var cards = [SimCard]()
+        var cards = [Card]()
         for dic in chargeList {
-            if let simCard = SimCard.deserialize(from: dic) {
-                cards.append(simCard)
+            if let card = Card.deserialize(from: dic) {
+                cards.append(card)
             }
         }
         self.chargeList = cards
@@ -199,11 +199,12 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
     }
  
     @objc func submitBtnClicked() {
-        SVProgressHUD.show(withStatus: "提交中...")
+        ProgressHUD.show(withStatus: "提交中...")
         APITool.request(target: .submitOrder(simNoList: simList, month: month), success: { [weak self] (result) in
             print("结果",result)
             
-            if let order = Order.deserialize(from: result) {
+            if let resultDict = result as? NSDictionary,
+                let order = Order.deserialize(from: resultDict) {
                 let vc = ConfirmPaymentVc()
                 vc.order = order
                 vc.month = self!.month
@@ -224,14 +225,18 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
         return .delete
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        simList.remove(at: (page - 1) * 10 + indexPath.row)
+        if (page - 1) * 10 + indexPath.row < simList.count {
+            simList.remove(at: (page - 1) * 10 + indexPath.row)
+            
+        }
         
-        SVProgressHUD.show(withStatus: "刷新中...")
-        
-        APITool.request(target: .inquiryCard(simNoList: simList, sim_type: 0, month: month, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
+        ProgressHUD.show(withStatus: "刷新中...")
+       
+        APITool.request(target: .getRenewedCardInfo(simNoList: simList, sim_type: 0, month: month, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
             print("结果",result)
             
-            if let chargeList = result["chargeList"] as? [NSDictionary] {
+            if let resultDict = result as? NSDictionary,
+                let chargeList = resultDict["chargeList"] as? [NSDictionary] {
                 self!.dealWithResult(chargeList: chargeList)
                 
                 self!.page = 1
@@ -264,14 +269,6 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate, Payme
         return cell
     }
     
-    func paymentConfirmViewWithPaymentMethod(_ method: PaymentMethod) {
-        switch method {
-        case .alipay:
-            break
-        case .weixin:
-            break
-        }
-    }
 }
 
 

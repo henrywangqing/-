@@ -8,10 +8,9 @@
 
 import Foundation
 import Moya
-import SVProgressHUD
 
 // 请求成功的回调
-typealias successCallback = (_ result: NSDictionary) -> Void
+typealias successCallback = (_ result: Any) -> Void
 // 请求失败的回调
 typealias failureCallback = (_ error: Any) -> Void
 
@@ -43,7 +42,7 @@ struct APITool {
             switch result {
                 
             case let .success(moyaResponse):
-                SVProgressHUD.dismiss()
+                ProgressHUD.dismiss()
                 
                 do {
                     let data = try moyaResponse.mapJSON()
@@ -51,7 +50,7 @@ struct APITool {
                     if let dic = data as? NSDictionary,
                        let code = dic["code"] as? Int,
                        code == 200,
-                       let successResult = dic["data"] as? NSDictionary
+                       let successResult = dic["data"]
                         {
                         success(successResult)
                         return
@@ -59,18 +58,18 @@ struct APITool {
                     }
                     failure(data)
                     if let dic = data as? NSDictionary,
-                        let msg = dic["error"] as? String {
-                        SVProgressHUD.showError(withStatus: msg)
+                        let msg = dic["msg"] as? String {
+                        ProgressHUD.showError(withStatus: msg)
                     }
                 } catch {
                     let error = MoyaError.jsonMapping(moyaResponse)
                     failure(error)
-                    SVProgressHUD.showError(withStatus: error.errorDescription)
+                    ProgressHUD.showError(withStatus: error.errorDescription)
                 }
             case let .failure(error):
-                SVProgressHUD.dismiss()
+                ProgressHUD.dismiss()
                 failure(error)
-                SVProgressHUD.showError(withStatus: error.errorDescription)
+                ProgressHUD.showError(withStatus: error.errorDescription)
             }
         }
     }
@@ -86,35 +85,48 @@ private extension String {
 
 enum APIService {
     case login(username: String, password: String)
+    case getInfo
     case logout
-    case inquiryCard(simNoList:[Any], sim_type: Int, month: Int, pageNumber:Int, pageSize:Int)
+    case getRenewedCardInfo(simNoList:[Any], sim_type: Int, month: Int, pageNumber:Int, pageSize:Int)
     case submitOrder(simNoList:[Any], month: Int)
     case confirmOrder(simNoList:[Any], sim_type:Int, month: Int
         , order_no: String, sum_fee: Double, pay_type: Int, pay_status: Bool)
-    case firstPage
+    case dashBoardInfo
+    case singleCardInquiry(sim_no: String)
+    case cardListInquiry(pageNumber: Int, pageSize: Int)
+    case orderListInquiry(pageNumber: Int, pageSize: Int)
 }
 
 extension APIService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: "http://120.79.199.18:8081/api/")!
+        return URL(string: "http://192.168.1.131:8081/api/")!
     }
 //    192.168.1.176  120.79.199.18
     public var path: String {
         switch self {
         case .login:
             return "login/login"
+        case .getInfo:
+            return "user/getInfo"
         case .logout:
-            return "APIService/logout"
-        case .inquiryCard( _, _, _, _, _):
+            return "user/logout"
+        case .getRenewedCardInfo( _, _, _, _, _):
             return "app/chargeList"
         case .submitOrder( _, _):
             return "app/orderInfo"
         case .confirmOrder( _, _, _, _, _, _, _):
             return "app/createOrder"
             
-        case .firstPage:
-            return "app/getSimStaticInfo"
+        case .dashBoardInfo:
+            return "app/dashBoardInfo"
+            
+        case .singleCardInquiry(_):
+            return "app/getSimTableExact"
+        case .cardListInquiry(_, _):
+            return "app/getSimTable"
+        case .orderListInquiry(_, _):
+            return "app/getOrderList"
         }
     }
     
@@ -122,36 +134,50 @@ extension APIService: TargetType {
         switch self {
         case .login:
             return .post
+        case .getInfo:
+            return .get
         case .logout:
-            return .post
-        case .inquiryCard( _, _, _, _, _):
+            return .get
+        case .getRenewedCardInfo( _, _, _, _, _):
             return .post
         case .submitOrder( _, _):
             return .post
         case .confirmOrder( _, _, _, _, _, _, _):
             return .post
-        case .firstPage:
+        case .dashBoardInfo:
             return .get
+        case .singleCardInquiry(_):
+            return .get
+        case .cardListInquiry(_, _):
+            return .post
+        case .orderListInquiry(_, _):
+            return .post
         }
     }
     
     public var task: Task {
         switch self {
         case .login(let username, let password):
-            
             return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
-            
+        case .getInfo:
+            return .requestPlain
         case .logout:
             return .requestPlain
-        case .inquiryCard(let simNoList, let sim_type, let month, let pageNumber, let pageSize):
-            print(["simNoList": simNoList, "sim_type": sim_type, "month": month, "pageNumber": pageNumber, "pageSize": pageSize])
+        case .getRenewedCardInfo(let simNoList, let sim_type, let month, let pageNumber, let pageSize):
+             
             return .requestParameters(parameters: ["simNoList": simNoList, "sim_type": sim_type, "month": month, "pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         case .submitOrder(let simNoList, let month):
             return .requestParameters(parameters: ["simNoList": simNoList, "month": month], encoding: JSONEncoding.default)
         case .confirmOrder(let simNoList, let sim_type, let month, let order_no, let sum_fee, let pay_type, let pay_status):
             return .requestParameters(parameters: ["simNoList": simNoList, "sim_type": sim_type, "month": month, "order_no": order_no, "sum_fee": sum_fee, "pay_type": pay_type, "pay_status": pay_status], encoding: JSONEncoding.default)
-        case .firstPage:
+        case .dashBoardInfo:
             return .requestPlain
+        case .singleCardInquiry(let sim_no): 
+            return .requestParameters(parameters: ["sim_no": sim_no], encoding: URLEncoding.default)
+        case .cardListInquiry(let pageNumber, let pageSize):
+            return .requestParameters(parameters: ["pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
+        case .orderListInquiry(let pageNumber, let pageSize):
+            return .requestParameters(parameters: ["pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         }
     }
     

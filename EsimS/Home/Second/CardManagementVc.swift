@@ -8,65 +8,66 @@
 
 import UIKit
 
-class CardManagementVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
+class CardManagementVc: BaseVc {
     
-    let titleArr = ["白马号码","套餐名称","开始日期","结束日期","总流量(MB)","已使用(MB)","剩余流量(MB)"]
+    let titleArr = ["白马号码:","套餐名称:","开始日期:","结束日期:","订单号码:"]
     
-    var valueArr = ["234234","香港一日游","2018-03-08","2018-05-08","50","20.1","29.9"]
+    var scrollView: UIScrollView!
     
-    var tableView: UITableView!
+    var headerView: UIView!
+    
+    var cardDiagramView: CardDiagramView!
+    
+    var card = Card()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setBarButton()
  
-        setUpTableView()
+        setUpScrollView()
         
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? titleArr.count : 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func setUpScrollView() {
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: KWidth, height: KHeight - KStatusBarH -  (navigationController?.navigationBar.height)!))
+        scrollView.alwaysBounceVertical = true
+        scrollView.backgroundColor = KBackgroundColor
+        view.addSubview(scrollView)
         
-        if indexPath.section == 0 {
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 17)
-            cell.textLabel?.text = titleArr[indexPath.row]
-            cell.detailTextLabel?.text = valueArr[indexPath.row]
+        setUpHeaderView()
+        
+        setUpCardDiagramView()
+    }
+    
+    func setUpHeaderView() {
+        headerView = UIView(frame: CGRect(x: 0, y: 20, width: KWidth, height: 140))
+        headerView.backgroundColor = UIColor.white
+        scrollView.addSubview(headerView)
+        
+        for i in 0 ..< 5 {
+            let titleLbl = UILabel(frame: CGRect(x: 10, y: 10 + CGFloat(i) * 25, width: UILabel.getWidth(titleArr[i], UIFont.systemFont(ofSize: 14)), height: 20), color: KColor(0, 0, 0, 0.8), fontsize: 13, text: titleArr[i])
+            titleLbl.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+            headerView.addSubview(titleLbl)
             
-            return cell
-        }else {
-            let cell = UITableViewCell()
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-            cell.textLabel?.textColor = KBlueColor
-            cell.textLabel?.text = "暂停卡"
-            cell.textLabel?.textAlignment = .center
+            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 15, y: titleLbl.y, width: 300, height: titleLbl.height), color: titleLbl.textColor, fontsize: 13, text: "未知")
             
-            return cell
+            headerView.addSubview(valueLbl)
         }
         
     }
-    
-    
-    
-    func setUpTableView() {
-        tableView = UITableView(frame: view.bounds, style: .grouped)
-        tableView.rowHeight = 48
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedSectionHeaderHeight = 30
+    func setUpCardDiagramView() {
         
-        view.addSubview(tableView)
+        card.flow = 50
+        card.flow_used = 30
+        card.flow_left = card.flow - card.flow_used
         
+        let cardDiagramView = CardDiagramView(frame: CGRect(x: 0, y: headerView.frame.maxY + 20, width: KWidth, height: 170), card: card)
+        
+        scrollView.addSubview(cardDiagramView)
     }
+    
+    
     func setBarButton() {
         title = "卡片管理"
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(dismissSelf))
@@ -75,10 +76,7 @@ class CardManagementVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     @objc func dismissSelf() {
         navigationController?.dismiss(animated: true, completion: nil)
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-     
-    }
+    
 }
 
 

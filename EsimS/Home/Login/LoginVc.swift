@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import SVProgressHUD
 import CryptoSwift
-
 
 class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -121,13 +119,14 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
     }
     
     @objc func loginBtnClicked() {
-        SVProgressHUD.show(withStatus: "登录中...")
+        ProgressHUD.show(withStatus: "登录中...")
         
         APITool.request(target: .login(username: accountTf.text!, password: (pwdTf.text?.md5())!), success: { (result) in
             print("结果",result)
-            SVProgressHUD.dismiss()
-            SVProgressHUD.showSuccess(withStatus: Mystring("登录成功"))
-            if let account = Account.deserialize(from: result) {
+             
+            ProgressHUD.showSuccess(withStatus: Mystring("登录成功"))
+            if let resultDict = result as? NSDictionary,
+                let account = Account.deserialize(from: resultDict) {
                 
                 DataManager.save(currentAccount: account)
                 UIApplication.shared.keyWindow?.rootViewController = MainTabBarVc()
@@ -136,7 +135,7 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             
         }) { (error) in
             print(error)
-            SVProgressHUD.dismiss() 
+            ProgressHUD.dismiss() 
         }
     }
     

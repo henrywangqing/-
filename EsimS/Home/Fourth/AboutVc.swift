@@ -25,6 +25,10 @@ class AboutVc: BaseVc {
         lbl.numberOfLines = 0
         view.addSubview(lbl)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
 }
 
 

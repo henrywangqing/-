@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import SVProgressHUD
-
+ 
 class AddRenewListVc: BaseVc, UITextViewDelegate, UIScrollViewDelegate {
     
     var scrollView = UIScrollView()
@@ -68,17 +67,18 @@ class AddRenewListVc: BaseVc, UITextViewDelegate, UIScrollViewDelegate {
             return
         }
  
-        SVProgressHUD.show(withStatus: "添加中...")
+        ProgressHUD.show(withStatus: "添加中...")
             
-        APITool.request(target: .inquiryCard(simNoList: NSString.arrayFromString(textView.text), sim_type: seg.selectedSegmentIndex + 1, month: Int(periodTf.text!)!, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
+        APITool.request(target: .getRenewedCardInfo(simNoList: NSString.arrayFromString(textView.text), sim_type: seg.selectedSegmentIndex + 1, month: Int(periodTf.text!)!, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
             print("结果",result)
             
-            if let simList = result["simList"] as? [Int],
-               let chargeList = result["chargeList"] as? [NSDictionary] {
-                var cards = [SimCard]()
+            if let resultDict = result as? NSDictionary,
+               let simList = resultDict["simList"] as? [Int],
+               let chargeList = resultDict["chargeList"] as? [NSDictionary] {
+                var cards = [Card]()
                 for dic in chargeList {
-                    if let simCard = SimCard.deserialize(from: dic) {
-                        cards.append(simCard)
+                    if let card = Card.deserialize(from: dic) {
+                        cards.append(card)
                     }
                 }
                 
@@ -123,7 +123,7 @@ class AddRenewListVc: BaseVc, UITextViewDelegate, UIScrollViewDelegate {
     
     
     func setUpSeg() {
-        seg = UISegmentedControl(items: [Mystring("ICCID"), Mystring("imsi")])
+        seg = UISegmentedControl(items: [Mystring("ICCID"), Mystring("IMSI")])
         seg.frame = CGRect(x: scrollView.width/2.0 - 100, y: 10, width: 200, height: 30)
         seg.selectedSegmentIndex = 0
         seg.tintColor = UIColor.red

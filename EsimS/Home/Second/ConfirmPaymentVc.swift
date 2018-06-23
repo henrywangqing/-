@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SVProgressHUD
+ 
 class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
     var paymentResultView: PaymentResultView!
     
@@ -207,29 +207,31 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
     @objc func payBtnClicked() {
         
         if order.balance < sum && selectedMethodBtn.tag == 500  {
-            print("怎么回事\(order.balance)， \(sum)")
-            SVProgressHUD.showError(withStatus: "余额不足")
+            
+            ProgressHUD.showError(withStatus: "余额不足")
             return
         }
         
-        SVProgressHUD.show(withStatus: "支付中...")
+        ProgressHUD.show(withStatus: "支付中...")
         APITool.request(target: .confirmOrder(simNoList: simList, sim_type: 1, month: month, order_no: order.order_no, sum_fee: sum, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
             print("结果",result)
+            self!.showPaymentResultView(.success, "付款成功")
             
-            
-        }) { (error) in
+        }) { [weak self] (error) in
             print(error)
-            
+            self!.showPaymentResultView(.success, "\(error)")
         }
-        
-        paymentResultView = PaymentResultView(frame: UIScreen.main.bounds, result: .success)
-        paymentResultView.showView()
-        paymentResultView.delegate = self
         
     }
     
-    func paymentResultViewClicked(_ result: KPaymentResult) {
-        switch result {
+    func showPaymentResultView(_ state: KPaymentState, _ resultString: String) {
+        paymentResultView = PaymentResultView(frame: UIScreen.main.bounds, paymentState: state, resultString: resultString)
+        paymentResultView.showView()
+        paymentResultView.delegate = self
+    }
+    
+    func paymentResultViewClicked(_ paymentState: KPaymentState) {
+        switch paymentState {
         case .success:
             paymentResultView.hideView()
             navigationController?.popToRootViewController(animated: true)

@@ -90,7 +90,7 @@ class SecondVc: BaseVc {
     @objc func toolBtnClicked(_ btn: UIButton) {
         switch btn.tag {
         case 500:
-            navigationController?.pushViewController(CardInquiry(), animated: true)
+            navigationController?.pushViewController(CardInquiryVc(), animated: true)
             
             break
         case 501:

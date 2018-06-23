@@ -10,8 +10,6 @@ import Foundation
 
 let DirPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last
 
-let KCurrentSIMCard = "KCurrentSIMCard"
-
 let KCurrentUserID = "KCurrentUserID"
 
 let CurrentAccountPath = path("CurrentAccount.plist")
@@ -51,18 +49,9 @@ class DataManager: NSObject {
         UserDefaults().set("", forKey: KCurrentUserID)
         UserDefaults().synchronize()
     }
-    
-    class func save(currentSIMCard: String) {
-        UserDefaults().set(currentSIMCard, forKey: KCurrentSIMCard)
-        UserDefaults().synchronize()
-    }
-    
+     
     class func currentUserID() -> String {
         return UserDefaults().string(forKey: KCurrentUserID) ?? ""
-    }
-    
-    class func currentSIMCard() -> String {
-        return UserDefaults().string(forKey: KCurrentSIMCard) ?? ""
     }
     
     class func currentAccount() -> Account {

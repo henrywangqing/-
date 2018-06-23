@@ -1,16 +1,9 @@
-//
-//  MyCardsVc.swift
-//  EsimS
-//
-//  Created by 王庆 on 2018/6/7.
-//  Copyright © 2018年 iotwoods. All rights reserved.
-//
 
 import UIKit
-
-class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
+ 
+class MyCardsVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
-    let offsetH:CGFloat = 100
+    let offsetH:CGFloat = 200
     
     var tableView: UITableView!
     
@@ -18,7 +11,9 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     
     var footerView: UIView!
     
-    var cardListInPage = [SimCard]()
+    var cardList = [Card]()
+    
+    var cardNoList = [Int]()
     
     var headLbl: UILabel!
     
@@ -32,35 +27,49 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     
     var pageView: UIView!
     
-    var totalNum: Int = 10
     
-    let cellTitleArr = ["序号","卡号","价格","流量","原到期","续费后到期"]
+    let cellTitleArr = ["白马号码","所属商户","ICCID","总流量","状态","到期时间"]
     
-    let proportionArr: [CGFloat] = [0.1, 0.2, 0.1, 0.1, 0.25, 0.25]
-    let cellTitleXArr: [CGFloat] = [0, 0.1, 0.3, 0.4, 0.5, 0.75]
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = Mystring("我的卡片")
-        
-        setUpData()
-        
-        setUpTableView()
-        
-    }
+    let proportionArr: [CGFloat] = [0.2, 0.15, 0.2, 0.1, 0.1, 0.25]
+    let cellTitleXArr: [CGFloat] = [0, 0.2, 0.35, 0.55, 0.65, 0.75]
+    
     func setUpData() {
         for _ in 0 ..< 10 {
-            let card = SimCard()
-            card.id = 234
-            card.price = 10
+            let card = Card()
+            card.bema_no = "sdfasdf"
+            card.supplier = "得意"
+            card.iccid = "23423423"
             card.flow = 50
-            card.expire_date = "2017-09-09"
-            card.charge_expire_date = "2017-11-09"
-            cardListInPage.append(card)
+            card.status = "正常"
+            card.real_expire = "2018-09-01"
+            cardList.append(card)
+            
+            
+        }
+        
+        for _ in 0 ..< 100 {
+            cardNoList.append(24)
         }
         
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = Mystring("卡片列表")
+        setUpData()
+        setUpTableView()
+        refreshData()
+    }
+    
+    func refreshData() {
+        APITool.request(target: .cardListInquiry(pageNumber: 1, pageSize: 10), success: { (result) in
+            print("结果", result)
+             
+        }) { (error) in
+            print(error)
+        }
+    }
     
     func setUpPageView() {
         pageView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width, height: 40))
@@ -68,7 +77,7 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         footerView.addSubview(pageView)
         
         for i in 0 ..< 2 {
-            let pageBtn = UIButton(frame: CGRect(x: KWidth/2.0 - 130 + 180 * CGFloat(i), y: 0, width: 80, height: 40), title: ["上一页","下一页"][i], titleColor: KColor(0, 0, 0, 0.8), fontsize: 16, target:self, selector: #selector(pageBtnClicked(_ :)))
+            let pageBtn = UIButton(frame: CGRect(x: KWidth/2.0 - 140 + 200 * CGFloat(i), y: 0, width: 80, height: 40), title: ["上一页","下一页"][i], titleColor: KColor(0, 0, 0, 0.8), fontsize: 16, target:self, selector: #selector(pageBtnClicked(_ :)))
             pageView.addSubview(pageBtn)
             if i == 0 {
                 pageBtn1 = pageBtn
@@ -77,7 +86,8 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 50, y: 0, width: 100, height: 40), color: UIColor.red, fontsize: 14)
+        
+        pageLbl = UILabel(frame: CGRect(x: KWidth/2.0 - 60, y: 0, width: 120, height: 40), color: UIColor.red, fontsize: 14)
         pageView.addSubview(pageLbl)
         
         refreshPages()
@@ -85,8 +95,9 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     
     func setUpHeadLbl() {
         
-        headLbl = UILabel.init(frame: CGRect(x: 20, y: 10, width: 300, height: 25), color: KColor(0, 0, 0, 0.8), fontsize:18, text: "总计：\(totalNum)张")
+        headLbl = UILabel.init(frame: CGRect(x: 10, y: 10, width: 300, height: 25), color: KColor(0, 0, 0, 0.8), fontsize:18, text: "总计：\(cardNoList.count)张")
         headerView.addSubview(headLbl)
+        
     }
     func setUpTableView() {
         
@@ -97,7 +108,7 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedSectionFooterHeight = 1
         tableView.backgroundColor = KBackgroundColor
         tableView.rowHeight = 40
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, max(550 - tableView.height + offsetH, offsetH), 0)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, max(555 - tableView.height + offsetH, offsetH), 0)
         view.addSubview(tableView)
         
         setUpHeaderView()
@@ -113,29 +124,29 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func setUpFooterView() {
-        footerView = UIView(frame: CGRect(x: 0, y: 0, width: KWidth, height: 75))
+        footerView = UIView(frame: CGRect(x: 0, y: 0, width: KWidth, height: 200))
         footerView.backgroundColor = KBackgroundColor
         tableView.tableFooterView = footerView
         setUpPageView()
-        
+       
     }
     
     func setUpHeaderView() {
-        headerView = UIView(frame: CGRect(x: 0, y: 0, width: KWidth, height: 75))
+        headerView = UIView(frame: CGRect(x: 0, y: 0, width: KWidth, height: 95))
         headerView.backgroundColor = KBackgroundColor
         tableView.tableHeaderView = headerView
         
         setUpHeadLbl()
         
         for i in 0 ..< 6 {
-            let lbl = UILabel(frame: CGRect(x: cellTitleXArr[i] * view.width, y: headLbl.frame.maxY + 10, width: proportionArr[i] * view.width, height: tableView.rowHeight), color: KColor(0, 0, 0, 0.8), alignment: .center, fontsize: 12, text: cellTitleArr[i])
+            let lbl = UILabel(frame: CGRect(x: cellTitleXArr[i] * view.width, y: headLbl.frame.maxY + 25, width: proportionArr[i] * view.width, height: tableView.rowHeight), color: KColor(0, 0, 0, 0.8), alignment: .center, fontsize: 12, text: cellTitleArr[i])
             headerView.addSubview(lbl)
         }
     }
     
     
     func refreshPages() {
-        let totalPage = totalNum%10 == 0 ? (totalNum/10) : totalNum/10 + 1
+        let totalPage = cardNoList.count%10 == 0 ? (cardNoList.count/10) : cardNoList.count/10 + 1
         if page <= 1 {
             pageBtn1.isEnabled = false
             pageBtn1.setTitleColor(UIColor.gray, for: .normal)
@@ -154,41 +165,65 @@ class MyCardsVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         
         pageLbl.text = "共\(totalPage)页，第\(page)页"
         
-        if totalNum == 0 {
+        if cardNoList.count == 0 {
             pageLbl.text = "共0页"
         }
         pageLbl.textAlignment = .center
     }
     
     @objc func pageBtnClicked(_ btn:UIButton) {
+        ProgressHUD.show(withStatus: "刷新中...")
         
-        if btn == pageBtn1 {
-            page -= 1
-        }else {
-            page += 1
-        }
-        
-        tableView.reloadData()
-        
-        refreshPages()
         
     }
+    func dealWithResult(chargeList: [NSDictionary]) {
+        var cards = [Card]()
+        for dic in chargeList {
+            if let card = Card.deserialize(from: dic) {
+                cards.append(card)
+            }
+        }
+        self.cardList = cards
+        tableView.reloadData()
+    }
+    
+    
+    //    MARK: tableviewdelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cardManagementVc = CardManagementVc()
+        cardManagementVc.card = cardList[indexPath.row]
+        navigationController?.pushViewController(cardManagementVc, animated: true)
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return cardList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
-        let card = cardListInPage[indexPath.row]
-        let txtArr = ["\(indexPath.row + 1)","\(card.id)","\(card.price)","\(card.flow)",card.expire_date,card.charge_expire_date]
+        let card = cardList[indexPath.row]
+     
+        let txtArr = [card.bema_no,card.supplier,card.iccid, "\(card.flow)", "\(card.status)",NSString.yyyyMMddFromString(card.real_expire)]
         for i in 0 ..< 6 {
-            let lbl = UILabel(frame: CGRect(x: cellTitleXArr[i] * view.width, y: 0, width: proportionArr[i] * view.width, height: tableView.rowHeight), color: KColor(0, 0, 0, 0.8), alignment: .center, fontsize: 12, text: txtArr[i]!)
-            
+            let lbl = UILabel(frame: CGRect(x: cellTitleXArr[i] * view.width, y: 0, width: proportionArr[i] * view.width, height: tableView.rowHeight), color: KColor(0, 0, 0, 0.8), alignment: .center, fontsize: 12, text: txtArr[i])
+            lbl.numberOfLines = 0
             cell.contentView.addSubview(lbl)
         }
         
         return cell
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
 
 }
+    
+
+
+
+
+
+

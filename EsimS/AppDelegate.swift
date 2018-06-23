@@ -12,10 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+ 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setRootViewCottroller()
+        ProgressHUD.setDefaultMaskType(.black)
         return true
     }
     private func setRootViewCottroller() {
@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UINavigationController(rootViewController: LoginVc())
             
         }
-        
         
     }
 

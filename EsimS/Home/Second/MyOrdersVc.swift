@@ -14,8 +14,16 @@ class MyOrdersVc: BaseVc {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "订单列表"
+        
+        refreshData()
     }
-    
+    func refreshData() {
+        APITool.request(target: .orderListInquiry(pageNumber: 1, pageSize: 10), success: { (result) in
+            print(result)
+        }) { (error) in
+            print(error)
+        }
+    }
 
     func setUpTableView() {
         tableView = UITableView(frame: view.bounds, style: .grouped)

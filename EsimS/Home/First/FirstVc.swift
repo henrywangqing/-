@@ -7,43 +7,46 @@
 //
 
 import UIKit
-import SVProgressHUD
 
+import CryptoSwift
 class FirstVc: BaseVc {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         
     }
+    var dashBoardInfo = DashBoardInfo()
+    var titleArr = [String]()
+    var valueArr = [String]()
     weak var apiLbl: UILabel!
     var scrollView = UIScrollView()
     var accountInfoView: UIView!
-    let titleArr = ["账号名称","注册日期","账号余额",
-                    "佣金余额","移动套餐折扣","电信套餐折扣",
-                    "联通套餐折扣","api key"]
-    let valueArr = [DataManager.currentAccount().username,"2018-05-10","¥\(DataManager.currentAccount().companyBalance)",
-                    "¥3291.80","10%","10%",
-                    "10%","986434532453545"]
-  
+    
     func setUpScrollView() {
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: KWidth, height: KHeight - KStatusBarH - (tabBarController?.tabBar.height)! - (navigationController?.navigationBar.height)!))
         scrollView.alwaysBounceVertical = true
+        scrollView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {[weak self] in
+            self!.refreshData()
+            
+        })
         view.addSubview(scrollView)
-        
+        setUpAccountInfoData()
         setUpAccountInfoView()
         setUpBusinessDiagramView()
     }
-    
-    func refreshData() {
-        SVProgressHUD.show(withStatus: "获取中...")
-        APITool.request(target: .firstPage, success: { [weak self] (result) in
-            print("结果",result)
-            
-        }) { (error) in
-            print(error)
-            
+    //        MARK:数据
+    func setUpAccountInfoData() {
+        
+        titleArr = ["账号名称","注册日期","账号余额",
+                        "佣金余额","api key"]
+        
+        valueArr = ["\(dashBoardInfo.baseInfo.account)","\(NSString.yyyyMMddFromString(dashBoardInfo.baseInfo.create_time))","¥\(String(format: "%.2f", dashBoardInfo.baseInfo.balance))","¥\(String(format: "%.2f", dashBoardInfo.baseInfo.commission))", "\(dashBoardInfo.baseInfo.appkey)"]
+        for i in 0 ..< dashBoardInfo.discountList.count {
+            titleArr.insert("\(dashBoardInfo.discountList[i].name)套餐折扣", at: 3 + i)
+            valueArr.insert("\(dashBoardInfo.discountList[i].discount)", at: 3 + i)
         }
     }
+    
     func setUpBusinessDiagramView() {
         let headLbl = UILabel(frame: CGRect(x: 10, y: 10 + accountInfoView.frame.maxY, width: 300, height: 25))
         headLbl.font = UIFont.systemFont(ofSize: 18)
@@ -53,23 +56,24 @@ class FirstVc: BaseVc {
         
         let subheadLbl = UILabel(frame: CGRect(x: 10, y: 10 + headLbl.frame.maxY, width: 300, height: 25))
         subheadLbl.font = UIFont.systemFont(ofSize: 15)
-        subheadLbl.setTextColors(["流量卡总计：","100","张"], [KColor(0, 0, 0, 0.8), UIColor.red, KColor(0, 0, 0, 0.8)])
+        
         scrollView.addSubview(subheadLbl)
         
-        var b = Business()
-        b.name = "中国联通"
-        b.total = 100
-        b.inUse = 20
-        b.unknown = 20
-        b.silent = 26
-        b.test = 14
-        b.outage = 20
-        let diagramView1 = DiagramView(frame: CGRect(x: 10, y: subheadLbl.frame.maxY + 5, width: scrollView.width - 20, height: 200), business:b)
         
-        scrollView.addSubview(diagramView1)
+        for i in 0 ..< dashBoardInfo.simInfoList.count {
+            let supplierTableView = SupplierTableView(frame: CGRect(x: 10, y: subheadLbl.frame.maxY + 5 + 215 * CGFloat(i), width: scrollView.width - 20, height: 200), supplierTable: dashBoardInfo.simInfoList[i])
+            
+            scrollView.addSubview(supplierTableView)
+            
+            dashBoardInfo.total += dashBoardInfo.simInfoList[i].count
+            
+            if i == dashBoardInfo.simInfoList.count - 1 {
+                scrollView.contentSize = CGSize(width: scrollView.width, height: supplierTableView.frame.maxY + 20)
+            }
+        }
         
-        scrollView.contentSize = CGSize(width: scrollView.width, height: diagramView1.frame.maxY + 20)
-         
+        subheadLbl.setTextColors(["流量卡总计：","\(dashBoardInfo.total)","张"], [KColor(0, 0, 0, 0.8), UIColor.red, KColor(0, 0, 0, 0.8)])
+        
     }
     
     func setUpAccountInfoView() {
@@ -79,18 +83,18 @@ class FirstVc: BaseVc {
         headLbl.text = "账户信息"
         scrollView.addSubview(headLbl)
         
-        accountInfoView = UIView(frame: CGRect(x: 10, y: headLbl.frame.maxY + 5, width: KWidth - 20, height: 240))
+        accountInfoView = UIView(frame: CGRect(x: 10, y: headLbl.frame.maxY + 5, width: KWidth - 20, height: 30 * CGFloat(titleArr.count)))
         accountInfoView.backgroundColor = UIColor.white
         accountInfoView.setShadow()
         scrollView.addSubview(accountInfoView)
-         
-        for i in 0 ..< 8 {
+        
+        for i in 0 ..< titleArr.count {
             let cell = UIView(frame: CGRect(x: 0, y: CGFloat(i) * 30, width: accountInfoView.width, height: 30))
             accountInfoView.addSubview(cell)
             
             let line1 = UIView(frame: CGRect(x: 5, y: 29.5, width: cell.width - 10, height: 0.5))
             line1.backgroundColor = UIColor.gray
-            if i != 7 {
+            if i != titleArr.count - 1 {
                 cell.addSubview(line1)
             }
             let line2 = UIView(frame: CGRect(x: cell.width/2.0, y: 0, width: 0.5, height: 29.5))
@@ -109,17 +113,6 @@ class FirstVc: BaseVc {
             valueLbl.font = UIFont.systemFont(ofSize: 13)
             cell.addSubview(valueLbl)
             
-            if i == 7 {
-                apiLbl = valueLbl
-                valueLbl.isHidden = true
-                
-                let showValueBtn = UIButton(frame: CGRect(x:valueLbl.x, y: 2, width: 50, height: 26), title: Mystring("显示"), imageName: "", titleColor: UIColor.white, fontsize: 14, target: self, selector: #selector(showValueBtnClicked(_:)))
-                showValueBtn.setBackgroundImage(UIColor.createImageWithColor(KBlueColor), for: .normal) 
-                showValueBtn.setBackgroundImage(UIColor.createImageWithColor(UIColor.red), for: .selected)
-                showValueBtn.setTitle("隐藏", for: .selected)
-                showValueBtn.titleLabel?.font = valueLbl.font
-                cell.addSubview(showValueBtn)
-            }
         }
     }
     
@@ -140,7 +133,24 @@ class FirstVc: BaseVc {
         setUpScrollView()
         refreshData()
     }
-     
+//    MARK:获取网络数据
+    func refreshData() {
+        ProgressHUD.showInfo(withStatus: "获取中...")
+        APITool.request(target: .dashBoardInfo, success: { [weak self] (result) in
+            print(result,"怎么回事")
+            if let resultDict = result as? NSDictionary,
+                let dashBoardInfo = DashBoardInfo.deserialize(from: resultDict) {
+               self!.dashBoardInfo = dashBoardInfo
+            }
+            self!.scrollView.removeFromSuperview()
+            self!.setUpScrollView()
+            self!.scrollView.mj_header.endRefreshing()
+        }) { [weak self] (error) in
+            print(error)
+            self!.scrollView.mj_header.endRefreshing()
+        }
+    }
+    
 }
 
 
