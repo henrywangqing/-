@@ -16,6 +16,12 @@ extension UIView {
         self.layer.shadowOpacity = 0.4
         self.layer.shadowRadius = 5
     }
+    func setBorder(width: CGFloat = 0, color: UIColor = UIColor.white, cornerRadius: CGFloat = 0) {
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
+        self.layer.cornerRadius = cornerRadius
+    }
+    
     var x: CGFloat{
         get{
             return self.frame.origin.x

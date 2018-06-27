@@ -7,17 +7,16 @@
 //
 
 import HandyJSON
-class DashBoardInfo: HandyJSON {
+struct DashBoardInfo: HandyJSON {
 
     var baseInfo = BaseInfo()
     var discountList = [DiscountInfo]()
     var simInfoList = [SupplierTable]()
     var total: Int = 0
-   
-    required init() {}
+    
 }
 
-class BaseInfo: HandyJSON {
+struct BaseInfo: HandyJSON {
     
     var account = ""
     var appkey = ""
@@ -25,9 +24,8 @@ class BaseInfo: HandyJSON {
     var commission: Double = 0
     var create_time = ""
     
-    required init() {}
 }
-class SupplierTable: HandyJSON {
+struct SupplierTable: HandyJSON {
     
     var s0: Int = 0
     var s1: Int = 0
@@ -39,15 +37,13 @@ class SupplierTable: HandyJSON {
     var name: String = ""
     var status_info = ""
     
-    required init() {}
 }
 
-class DiscountInfo: HandyJSON {
+struct DiscountInfo: HandyJSON {
     
     var discount: Double = 1
     var name = ""
-    
-    required init() {}
+     
 }
 
 

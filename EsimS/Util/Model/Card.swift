@@ -7,7 +7,20 @@
 //
 
 import HandyJSON
-class Card: HandyJSON {
+struct CardsResult: HandyJSON {
+    var totalCount: Int = 0
+    var simList = [Card]()
+    
+}
+struct ChargeCardsResult: HandyJSON {
+    var totalPage: Int = 0
+    var simList = [Int]()
+    var chargeList = [Card]()
+    var month: Int = 1
+    
+}
+
+struct Card: HandyJSON {
      
     var order_no: String = ""
     var No: String = ""
@@ -36,7 +49,6 @@ class Card: HandyJSON {
     var discount: Double = 0
     var bema_no: String = ""
     
-    required init() {}
 }
 
 

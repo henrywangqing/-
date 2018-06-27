@@ -73,23 +73,14 @@ class AddRenewListVc: BaseVc, UITextViewDelegate, UIScrollViewDelegate {
             print("结果",result)
             
             if let resultDict = result as? NSDictionary,
-               let simList = resultDict["simList"] as? [Int],
-               let chargeList = resultDict["chargeList"] as? [NSDictionary] {
-                var cards = [Card]()
-                for dic in chargeList {
-                    if let card = Card.deserialize(from: dic) {
-                        cards.append(card)
-                    }
-                }
-                
+                let chargeCardsResult = ChargeCardsResult.deserialize(from: resultDict) {
                 let showRenewListVc = ShowRenewListVc()
-                showRenewListVc.simList = simList
-                showRenewListVc.chargeList = cards
-                showRenewListVc.month = Int(self!.periodTf.text!)!
-            self!.navigationController?.pushViewController(showRenewListVc, animated: true)
+                showRenewListVc.chargeCardsResult = chargeCardsResult
+                showRenewListVc.chargeCardsResult.month = Int(self!.periodTf.text!)!
+                self!.navigationController?.pushViewController(showRenewListVc, animated: true)
                 
             }
-             
+            
         }) { (error) in
             print(error)
             

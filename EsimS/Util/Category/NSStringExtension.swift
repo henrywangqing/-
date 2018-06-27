@@ -26,20 +26,29 @@ extension NSString {
     
     class func yyyyMMddFromString(_ string: String) -> String {
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyyMMdd"
-//        let date = dateFormatter.date(from: string)
-//        if date == nil {
-//            return "20000101"
-//        }
-//        return dateFormatter.string(from: date!)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
         
-        if string.count > 10 {
-            
-           return (string as NSString).substring(to: 10)
+        let date = dateFormatter.date(from: string)
+        if date == nil {
+            return "2000-01-01"
         }
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date!)
+ 
+    }
+    class func yyyyMMddHHmmssFromString(_ string: String) -> String {
         
-        return "2000-01-01"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+        
+        let date = dateFormatter.date(from: string)
+        if date == nil {
+            return "2000-01-01 00:00:00"
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: date!)
+        
     }
 }
 

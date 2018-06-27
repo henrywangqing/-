@@ -58,18 +58,21 @@ struct APITool {
                     }
                     failure(data)
                     if let dic = data as? NSDictionary,
-                        let msg = dic["msg"] as? String {
-                        ProgressHUD.showError(withStatus: msg)
+                        let msg = dic["message"] as? String {
+                        ProgressHUD.showError(withStatus: Mystring(msg))
                     }
+                    
                 } catch {
                     let error = MoyaError.jsonMapping(moyaResponse)
                     failure(error)
                     ProgressHUD.showError(withStatus: error.errorDescription)
                 }
+                break
             case let .failure(error):
                 ProgressHUD.dismiss()
                 failure(error)
                 ProgressHUD.showError(withStatus: error.errorDescription)
+                break
             }
         }
     }
@@ -95,6 +98,7 @@ enum APIService {
     case singleCardInquiry(sim_no: String)
     case cardListInquiry(pageNumber: Int, pageSize: Int)
     case orderListInquiry(pageNumber: Int, pageSize: Int)
+    case refreshCardInfo(iccid: String)
 }
 
 extension APIService: TargetType {
@@ -117,16 +121,16 @@ extension APIService: TargetType {
             return "app/orderInfo"
         case .confirmOrder( _, _, _, _, _, _, _):
             return "app/createOrder"
-            
         case .dashBoardInfo:
             return "app/dashBoardInfo"
-            
         case .singleCardInquiry(_):
             return "app/getSimTableExact"
         case .cardListInquiry(_, _):
             return "app/getSimTable"
         case .orderListInquiry(_, _):
             return "app/getOrderList"
+        case .refreshCardInfo(_):
+            return "app/refreshSimInfo"
         }
     }
     
@@ -151,6 +155,8 @@ extension APIService: TargetType {
         case .cardListInquiry(_, _):
             return .post
         case .orderListInquiry(_, _):
+            return .post
+        case .refreshCardInfo(_):
             return .post
         }
     }
@@ -178,6 +184,8 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         case .orderListInquiry(let pageNumber, let pageSize):
             return .requestParameters(parameters: ["pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
+        case .refreshCardInfo(let iccid):
+            return .requestParameters(parameters: ["iccid": iccid], encoding: JSONEncoding.default)
         }
     }
     

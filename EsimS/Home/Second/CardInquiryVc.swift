@@ -78,12 +78,22 @@ class CardInquiryVc: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITable
         APITool.request(target: .singleCardInquiry(sim_no: inquiryTf.text!), success: { [weak self] (result) in
             
             print("结果", result)
+            if let resultDict = result as? [NSDictionary],
+                let cards = [Card].deserialize(from: resultDict) {
+                if cards.count > 0 {
+                    self!.presentCardManagementVc(card: cards.first!!)
+                }
+            }
             
-            let vc = CardManagementVc()
-//            vc.card =
-//            self!.tabBarController?.present(UINavigationController(rootViewController: CardManagementVc()), animated: true, completion: nil)
         }) { (error) in
             print(error)
+        }
+    }
+    func presentCardManagementVc(card: Card) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = CardManagementVc()
+            vc.card = card
+            self!.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
         }
     }
     

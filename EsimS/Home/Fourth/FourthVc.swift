@@ -83,7 +83,7 @@ class FourthVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             }
         }else {
             
-            let alertController = UIAlertController(title: "确定退出登录吗", titleA: "取消", colorA: KBlueColor, handlerA: nil, titleB: "确定", colorB: UIColor.red) { [weak self] (UIAlertAction) in
+            let alertController = UIAlertController(title: "确定退出登录吗", titleA: "取消", colorA: KBlueColor, handlerA: nil, titleB: "确定", colorB: UIColor.red) { [weak self] (action) in
               
                 self!.logout()
             }

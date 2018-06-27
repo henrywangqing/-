@@ -10,6 +10,10 @@ import UIKit
  
 class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
+    var chargeCardsResult = ChargeCardsResult()
+    
+    var page: Int = 1
+    
     let offsetH:CGFloat = 200
     
     var tableView: UITableView!
@@ -18,10 +22,6 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
     var footerView: UIView!
     
-    var chargeList = [Card]()
-    
-    var simList = [Int]()
-    
     var headLbl: UILabel!
     
     var pageLbl: UILabel!
@@ -29,15 +29,11 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     weak var pageBtn1: UIButton!
     
     weak var pageBtn2: UIButton!
-    
-    var page: Int = 1
      
     var pageView: UIView!
     
     var submitBtn: UIButton!
     
-    var month: Int = 1
-     
     let cellTitleArr = ["序号","卡号","价格","流量","原到期","续费后到期"]
     
     let proportionArr: [CGFloat] = [0.1, 0.2, 0.1, 0.1, 0.25, 0.25]
@@ -84,7 +80,7 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
     func setUpHeadLbl() {
   
-        headLbl = UILabel.init(frame: CGRect(x: 10, y: 10, width: 300, height: 25), color: KColor(0, 0, 0, 0.8), fontsize:18, text: "总计：\(simList.count)张")
+        headLbl = UILabel.init(frame: CGRect(x: 10, y: 10, width: 300, height: 25), color: KColor(0, 0, 0, 0.8), fontsize:18, text: "总计：\(chargeCardsResult.simList.count)张")
         headerView.addSubview(headLbl)
         
         let hintLbl = UILabel.init(frame: CGRect(x: 10, y: headLbl.frame.maxY + 5, width: 300, height: 20), color: KColor(0, 0, 0, 0.8), fontsize:14, text: "向左滑动可从列表中删除")
@@ -138,7 +134,7 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
     
     func refreshPages() {
-        let totalPage = simList.count%10 == 0 ? (simList.count/10) : simList.count/10 + 1
+        let totalPage = chargeCardsResult.simList.count%10 == 0 ? (chargeCardsResult.simList.count/10) : chargeCardsResult.simList.count/10 + 1
         if page <= 1 {
             pageBtn1.isEnabled = false
             pageBtn1.setTitleColor(UIColor.gray, for: .normal)
@@ -157,110 +153,83 @@ class ShowRenewListVc: BaseVc, UITableViewDataSource, UITableViewDelegate {
     
         pageLbl.text = "共\(totalPage)页，第\(page)页"
         
-        if simList.count == 0 {
+        if chargeCardsResult.simList.count == 0 {
             pageLbl.text = "共0页"
         }
         pageLbl.textAlignment = .center
     }
     
     @objc func pageBtnClicked(_ btn:UIButton) {
+        refreshData(pageNumber: btn == pageBtn1 ? page - 1 : page + 1)
+        
+    }
+   
+    
+    func refreshData(pageNumber: Int) {
         ProgressHUD.show(withStatus: "刷新中...")
         
-        APITool.request(target: .getRenewedCardInfo(simNoList: simList, sim_type: 0, month: month, pageNumber: btn == pageBtn1 ? page - 1 : page + 1, pageSize: 10), success: { [weak self] (result) in
+        APITool.request(target: .getRenewedCardInfo(simNoList: chargeCardsResult.simList, sim_type: 0, month: chargeCardsResult.month, pageNumber: pageNumber, pageSize: 10), success: { [weak self] (result) in
             print("结果",result)
-             
+            
             if let resultDict = result as? NSDictionary,
-               let chargeList = resultDict["chargeList"] as? [NSDictionary] {
-                self!.dealWithResult(chargeList: chargeList)
+                let chargeCardsResult = ChargeCardsResult.deserialize(from: resultDict) {
+                let month = self!.chargeCardsResult.month
                 
-                if btn == self!.pageBtn1 {
-                    self!.page -= 1
-                }else {
-                    self!.page += 1
-                }
-                self!.refreshPages()
+                self!.chargeCardsResult = chargeCardsResult
+                self!.chargeCardsResult.month = month
                 
+                self!.page = pageNumber
+                self!.tableView.removeFromSuperview()
+                self!.setUpTableView()
             }
             
         }) { (error) in
             print(error)
             
         }
-    }
-    func dealWithResult(chargeList: [NSDictionary]) {
-        var cards = [Card]()
-        for dic in chargeList {
-            if let card = Card.deserialize(from: dic) {
-                cards.append(card)
-            }
-        }
-        self.chargeList = cards
-        tableView.reloadData()
     }
  
     @objc func submitBtnClicked() {
         ProgressHUD.show(withStatus: "提交中...")
-        APITool.request(target: .submitOrder(simNoList: simList, month: month), success: { [weak self] (result) in
+        APITool.request(target: .submitOrder(simNoList: chargeCardsResult.simList, month: chargeCardsResult.month), success: { [weak self] (result) in
             print("结果",result)
             
             if let resultDict = result as? NSDictionary,
-                let order = Order.deserialize(from: resultDict) {
+                let bill = Bill.deserialize(from: resultDict) {
                 let vc = ConfirmPaymentVc()
-                vc.order = order
-                vc.month = self!.month
-                vc.simList = self!.simList 
+                vc.bill = bill
+                vc.bill.month = self!.chargeCardsResult.month
+                vc.bill.simList = self!.chargeCardsResult.simList
             self!.navigationController?.pushViewController(vc, animated: true)
                 
             }
-            
             
         }) { (error) in
             print(error)
             
         }
-        
     }
 //    MARK: tableviewdelegate
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .delete
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (page - 1) * 10 + indexPath.row < simList.count {
-            simList.remove(at: (page - 1) * 10 + indexPath.row)
+        if (page - 1) * 10 + indexPath.row < chargeCardsResult.simList.count {
+            chargeCardsResult.simList.remove(at: (page - 1) * 10 + indexPath.row)
+            refreshData(pageNumber: 1)
             
         }
-        
-        ProgressHUD.show(withStatus: "刷新中...")
-       
-        APITool.request(target: .getRenewedCardInfo(simNoList: simList, sim_type: 0, month: month, pageNumber: 1, pageSize: 10), success: { [weak self] (result) in
-            print("结果",result)
-            
-            if let resultDict = result as? NSDictionary,
-                let chargeList = resultDict["chargeList"] as? [NSDictionary] {
-                self!.dealWithResult(chargeList: chargeList)
-                
-                self!.page = 1
-                self!.refreshPages()
-                
-            }
-            
-        }) { (error) in
-            print(error)
-            
-        }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chargeList.count
+        return chargeCardsResult.chargeList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
-        let card = chargeList[indexPath.row]
+        let card = chargeCardsResult.chargeList[indexPath.row]
         let txtArr = ["\(indexPath.row + 1)",card.imsi,"\(card.price)","\(card.flow)",NSString.yyyyMMddFromString(card.expire_date),NSString.yyyyMMddFromString(card.charge_expire_date)]
-        for i in 0 ..< 6 {
+        for i in 0 ..< proportionArr.count {
             let lbl = UILabel(frame: CGRect(x: cellTitleXArr[i] * view.width, y: 0, width: proportionArr[i] * view.width, height: tableView.rowHeight), color: KColor(0, 0, 0, 0.8), alignment: .center, fontsize: 12, text: txtArr[i])
             lbl.numberOfLines = 0 
             cell.contentView.addSubview(lbl)

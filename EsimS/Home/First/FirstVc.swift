@@ -137,7 +137,7 @@ class FirstVc: BaseVc {
     func refreshData() {
         ProgressHUD.showInfo(withStatus: "获取中...")
         APITool.request(target: .dashBoardInfo, success: { [weak self] (result) in
-            print(result,"怎么回事")
+            print("概览", result)
             if let resultDict = result as? NSDictionary,
                 let dashBoardInfo = DashBoardInfo.deserialize(from: resultDict) {
                self!.dashBoardInfo = dashBoardInfo

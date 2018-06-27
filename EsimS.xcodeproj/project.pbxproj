@@ -54,7 +54,7 @@
 		4306EF5D20DA5CE300A97ED0 /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4306EF5120DA5CE300A97ED0 /* JSONHTTPClient.m */; };
 		4306EF5E20DA5CE300A97ED0 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4306EF5220DA5CE300A97ED0 /* JSONAPI.m */; };
 		4306EF5F20DA5CE300A97ED0 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4306EF5620DA5CE300A97ED0 /* JSONModel+networking.m */; };
-		4306EF6420DB544E00A97ED0 /* CardDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4306EF6320DB544E00A97ED0 /* CardDiagramView.swift */; };
+		4306EF6420DB544E00A97ED0 /* FlowTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4306EF6320DB544E00A97ED0 /* FlowTableView.swift */; };
 		430872A820D3B51700AD375F /* PaymentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430872A720D3B51700AD375F /* PaymentResultView.swift */; };
 		4309AEE620C7BB1100EC81F3 /* CardInquiryVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309AEE520C7BB1100EC81F3 /* CardInquiryVc.swift */; };
 		4309AEFB20C7E7B200EC81F3 /* CardManagementVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309AEFA20C7E7B200EC81F3 /* CardManagementVc.swift */; };
@@ -80,6 +80,9 @@
 		430CFA1020A3EB9400D7A1FF /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430CFA0F20A3EB9400D7A1FF /* Account.swift */; };
 		430CFA1220A3F2C200D7A1FF /* ChooseCountryVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430CFA1120A3F2C200D7A1FF /* ChooseCountryVc.swift */; };
 		430CFA1B20A4537900D7A1FF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430CFA1A20A4537900D7A1FF /* API.swift */; };
+		4313AA4320E36AED00508FCD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4313AA4220E36AED00508FCD /* OrderCell.swift */; };
+		4313AA4520E3774400508FCD /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4313AA4420E3774400508FCD /* Order.swift */; };
+		4313AA4720E381E900508FCD /* OrderDetailVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4313AA4620E381E900508FCD /* OrderDetailVc.swift */; };
 		432A8D7F20C13E8200EA66F0 /* FourthVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A8D7E20C13E8200EA66F0 /* FourthVc.swift */; };
 		432A8D8120C226E200EA66F0 /* AddRenewListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A8D8020C226E200EA66F0 /* AddRenewListVc.swift */; };
 		432A8D8320C23D7400EA66F0 /* ShowRenewListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A8D8220C23D7400EA66F0 /* ShowRenewListVc.swift */; };
@@ -113,7 +116,7 @@
 		43B0B66020CE51760071A7B1 /* 单卡查询@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B0B65920CE51750071A7B1 /* 单卡查询@2x.png */; };
 		43B0B66720CF57600071A7B1 /* ConfirmPaymentVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66620CF57600071A7B1 /* ConfirmPaymentVc.swift */; };
 		43B0B66920CF9EBE0071A7B1 /* NSStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66820CF9EBE0071A7B1 /* NSStringExtension.swift */; };
-		43B0B66B20D0FF830071A7B1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66A20D0FF830071A7B1 /* Order.swift */; };
+		43B0B66B20D0FF830071A7B1 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B66A20D0FF830071A7B1 /* Bill.swift */; };
 		43B0B67120D239990071A7B1 /* DashBoardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0B67020D239990071A7B1 /* DashBoardInfo.swift */; };
 		43E4100020BE90310034917B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E40FFF20BE90310034917B /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
@@ -211,7 +214,7 @@
 		4306EF5420DA5CE300A97ED0 /* JSONHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONHTTPClient.h; sourceTree = "<group>"; };
 		4306EF5520DA5CE300A97ED0 /* JSONAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPI.h; sourceTree = "<group>"; };
 		4306EF5620DA5CE300A97ED0 /* JSONModel+networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONModel+networking.m"; sourceTree = "<group>"; };
-		4306EF6320DB544E00A97ED0 /* CardDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDiagramView.swift; sourceTree = "<group>"; };
+		4306EF6320DB544E00A97ED0 /* FlowTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowTableView.swift; sourceTree = "<group>"; };
 		430872A720D3B51700AD375F /* PaymentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultView.swift; sourceTree = "<group>"; };
 		4309AEE520C7BB1100EC81F3 /* CardInquiryVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInquiryVc.swift; sourceTree = "<group>"; };
 		4309AEE820C7C25C00EC81F3 /* EsimS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EsimS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -238,6 +241,9 @@
 		430CFA0F20A3EB9400D7A1FF /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		430CFA1120A3F2C200D7A1FF /* ChooseCountryVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCountryVc.swift; sourceTree = "<group>"; };
 		430CFA1A20A4537900D7A1FF /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		4313AA4220E36AED00508FCD /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		4313AA4420E3774400508FCD /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		4313AA4620E381E900508FCD /* OrderDetailVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVc.swift; sourceTree = "<group>"; };
 		432A8D7E20C13E8200EA66F0 /* FourthVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthVc.swift; sourceTree = "<group>"; };
 		432A8D8020C226E200EA66F0 /* AddRenewListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRenewListVc.swift; sourceTree = "<group>"; };
 		432A8D8220C23D7400EA66F0 /* ShowRenewListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRenewListVc.swift; sourceTree = "<group>"; };
@@ -280,7 +286,7 @@
 		43B0B65920CE51750071A7B1 /* 单卡查询@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "单卡查询@2x.png"; sourceTree = "<group>"; };
 		43B0B66620CF57600071A7B1 /* ConfirmPaymentVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentVc.swift; sourceTree = "<group>"; };
 		43B0B66820CF9EBE0071A7B1 /* NSStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringExtension.swift; sourceTree = "<group>"; };
-		43B0B66A20D0FF830071A7B1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		43B0B66A20D0FF830071A7B1 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		43B0B67020D239990071A7B1 /* DashBoardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardInfo.swift; sourceTree = "<group>"; };
 		43E40FFF20BE90310034917B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7CA773982D0C70D00E883B1F /* Pods-EsimS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsimS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsimS/Pods-EsimS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -527,8 +533,9 @@
 			children = (
 				4309EF5720AD86F700BBEB03 /* PlanCell.swift */,
 				4309EF6720AFD01200BBEB03 /* PlanDetailCell.swift */,
+				4313AA4220E36AED00508FCD /* OrderCell.swift */,
 				43009F1E20D359FD001607B1 /* SupplierTableView.swift */,
-				4306EF6320DB544E00A97ED0 /* CardDiagramView.swift */,
+				4306EF6320DB544E00A97ED0 /* FlowTableView.swift */,
 				432A8D8420C2660900EA66F0 /* PaymentConfirmView.swift */,
 				430872A720D3B51700AD375F /* PaymentResultView.swift */,
 			);
@@ -543,7 +550,8 @@
 				4309EF5920AE762F00BBEB03 /* Plan.swift */,
 				430CFA0F20A3EB9400D7A1FF /* Account.swift */,
 				4309EF5420AC396B00BBEB03 /* Country.swift */,
-				43B0B66A20D0FF830071A7B1 /* Order.swift */,
+				43B0B66A20D0FF830071A7B1 /* Bill.swift */,
+				4313AA4420E3774400508FCD /* Order.swift */,
 				43B0B67020D239990071A7B1 /* DashBoardInfo.swift */,
 			);
 			path = Model;
@@ -752,6 +760,7 @@
 				4309AEFD20C8DFB300EC81F3 /* MyCardsVc.swift */,
 				4345430820DCCE4B00E75A35 /* CardDetailVc.swift */,
 				4309EF5D20AEC30E00BBEB03 /* MyOrdersVc.swift */,
+				4313AA4620E381E900508FCD /* OrderDetailVc.swift */,
 			);
 			path = Second;
 			sourceTree = "<group>";
@@ -1012,7 +1021,7 @@
 				4306EF5E20DA5CE300A97ED0 /* JSONAPI.m in Sources */,
 				4306EF2920DA575500A97ED0 /* MJRefreshAutoGifFooter.m in Sources */,
 				4306EF5B20DA5CE300A97ED0 /* JSONModelClassProperty.m in Sources */,
-				43B0B66B20D0FF830071A7B1 /* Order.swift in Sources */,
+				43B0B66B20D0FF830071A7B1 /* Bill.swift in Sources */,
 				4306EF2F20DA575500A97ED0 /* MJRefreshHeader.m in Sources */,
 				43B0B67120D239990071A7B1 /* DashBoardInfo.swift in Sources */,
 				4309EF5A20AE762F00BBEB03 /* Plan.swift in Sources */,
@@ -1020,11 +1029,13 @@
 				43B0B66720CF57600071A7B1 /* ConfirmPaymentVc.swift in Sources */,
 				43358F7020A13F8E00ED07EA /* SecondVc.swift in Sources */,
 				4309EF5120AC379800BBEB03 /* CountryCode.swift in Sources */,
+				4313AA4320E36AED00508FCD /* OrderCell.swift in Sources */,
 				4306EF5F20DA5CE300A97ED0 /* JSONModel+networking.m in Sources */,
 				4309EF3F20AAB00100BBEB03 /* UIViewExtension.swift in Sources */,
 				432A8D7F20C13E8200EA66F0 /* FourthVc.swift in Sources */,
 				4306EF5820DA5CE300A97ED0 /* JSONKeyMapper.m in Sources */,
 				43E4100020BE90310034917B /* UIColorExtension.swift in Sources */,
+				4313AA4720E381E900508FCD /* OrderDetailVc.swift in Sources */,
 				4306EF3220DA575500A97ED0 /* MJRefreshComponent.m in Sources */,
 				432A8D8120C226E200EA66F0 /* AddRenewListVc.swift in Sources */,
 				43358F7220A13FA200ED07EA /* ThirdVc.swift in Sources */,
@@ -1054,8 +1065,9 @@
 				4306EF2520DA575500A97ED0 /* MJRefreshBackGifFooter.m in Sources */,
 				4306EF2320DA575500A97ED0 /* NSBundle+MJRefresh.m in Sources */,
 				4303061320C52AF000FBFDB0 /* UITextFieldExtension.swift in Sources */,
+				4313AA4520E3774400508FCD /* Order.swift in Sources */,
 				4306EF3120DA575500A97ED0 /* MJRefreshAutoFooter.m in Sources */,
-				4306EF6420DB544E00A97ED0 /* CardDiagramView.swift in Sources */,
+				4306EF6420DB544E00A97ED0 /* FlowTableView.swift in Sources */,
 				4306EF5920DA5CE300A97ED0 /* JSONModel.m in Sources */,
 				4309EF4520AAB57400BBEB03 /* RegVc.swift in Sources */,
 				432A8D8320C23D7400EA66F0 /* ShowRenewListVc.swift in Sources */,
@@ -1261,8 +1273,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48HYE63JX9;
+				DEVELOPMENT_TEAM = P62Z4Q62F5;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -1273,8 +1287,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterworld.PetCollar521;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iotwoods.BemaB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/EsimS/EsimS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -1288,8 +1303,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48HYE63JX9;
+				DEVELOPMENT_TEAM = P62Z4Q62F5;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -1300,8 +1317,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.waterworld.PetCollar521;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iotwoods.BemaB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/EsimS/EsimS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

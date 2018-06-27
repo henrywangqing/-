@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MyOrdersVc: BaseVc {
+class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
+    var orders = [Order]()
 
     var tableView: UITableView!
     override func viewDidLoad() {
@@ -19,7 +20,9 @@ class MyOrdersVc: BaseVc {
     }
     func refreshData() {
         APITool.request(target: .orderListInquiry(pageNumber: 1, pageSize: 10), success: { (result) in
+            
             print(result)
+            
         }) { (error) in
             print(error)
         }
@@ -27,14 +30,28 @@ class MyOrdersVc: BaseVc {
 
     func setUpTableView() {
         tableView = UITableView(frame: view.bounds, style: .grouped)
-        tableView.rowHeight = 48
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.rowHeight = 160
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.estimatedSectionHeaderHeight = 30
-        
+        tableView.separatorStyle = .none
         view.addSubview(tableView)
         
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return orders.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: OrderCell!
+        cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! OrderCell
+        if cell == nil {
+            cell = OrderCell.init(style: .default, reuseIdentifier: "cell")
+        }
+        cell.order = orders[indexPath.row]
+        return cell
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

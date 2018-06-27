@@ -1,5 +1,5 @@
 //
-//  DiagramView.swift
+//  FlowTableView.swift
 //  EsimS
 //
 //  Created by 王庆 on 2018/6/15.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class CardDiagramView: UIView {
+class FlowTableView: UIView {
     
     var backView: UIView!
     var card: Card!
-    let sectorSpace: CGFloat = 2
-    let lineW: CGFloat = 30
+    let sectorSpace: CGFloat = 0
+    let lineW: CGFloat = 20
     let space: CGFloat = 10
     let blockW: CGFloat = 15
     let backW: CGFloat = 280

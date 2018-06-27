@@ -36,7 +36,7 @@ class PaymentResultView: UIView {
         
         whiteView = UIView(frame: CGRect(x: 20, y: -whiteViewH, width: KWidth - 40, height: whiteViewH))
         whiteView.backgroundColor = UIColor.white
-        whiteView.layer.cornerRadius = 5
+        whiteView.setBorder(cornerRadius: 5)
         addSubview(whiteView)
         
         let lbl = UILabel(frame: CGRect(x: 0, y: whiteViewH/2.0 - 50, width: whiteView.width, height: 25), color: UIColor.black, alignment: .center, fontsize: 16, text:  resultString)

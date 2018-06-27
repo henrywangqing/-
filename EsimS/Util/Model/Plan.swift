@@ -5,8 +5,7 @@
 //  Created by 王庆 on 2018/5/18.
 //  Copyright © 2018年 iotwoods. All rights reserved.
 //
-
-import Foundation
+ 
 import HandyJSON
 
 struct Plan: HandyJSON {
@@ -17,9 +16,5 @@ struct Plan: HandyJSON {
     var originalPrice: String = ""
     var finalPrice: String = ""
     var discount: String = ""
-    
-    var description: [String: Any]{
-        return self.toJSON()!
-    }
     
 }

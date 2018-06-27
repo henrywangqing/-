@@ -9,11 +9,11 @@
 import UIKit
 
 extension UILabel {
-    convenience init(frame:CGRect, color:UIColor = UIColor.black, backgroundColor:UIColor = UIColor.clear, alignment:NSTextAlignment = .left, fontsize:CGFloat = 15, text:String = "") {
+    convenience init(frame:CGRect, color:UIColor = UIColor.black, backgroundColor:UIColor = UIColor.clear, alignment:NSTextAlignment = .left, fontsize:CGFloat = 15, weight:UIFont.Weight = .regular, text:String = "") {
         self.init(frame: frame)
         self.textColor = color
         self.textAlignment = alignment
-        self.font = UIFont.systemFont(ofSize: fontsize)
+        self.font = UIFont.systemFont(ofSize: fontsize, weight: weight)
         self.text = text
         self.backgroundColor = backgroundColor
         
@@ -37,6 +37,16 @@ extension UILabel {
         
     }
     
+    func set(frame:CGRect, color:UIColor = UIColor.black, backgroundColor:UIColor = UIColor.clear, alignment:NSTextAlignment = .left, fontsize:CGFloat = 15, weight:UIFont.Weight = .regular, text:String = "") {
+        self.frame = frame
+        self.textColor = color
+        self.textAlignment = alignment
+        self.font = UIFont.systemFont(ofSize: fontsize, weight: weight)
+        self.text = text
+        self.backgroundColor = backgroundColor
+        
+    }
+    
     func setTextColors(_ texts:[String], _ colors:[UIColor]) {
         var str = ""
         for text in texts {
@@ -53,4 +63,23 @@ extension UILabel {
         self.attributedText = attTxt
         
     }
+    
+    func setTextFonts(_ texts:[String], _ fonts:[UIFont]) {
+        var str = ""
+        for text in texts {
+            str.append(text)
+        }
+        let totalTxt = str as NSString
+        let attTxt = NSMutableAttributedString.init(string: str)
+        
+        for i in 0 ..< texts.count {
+            
+            attTxt.addAttribute(.font, value: fonts[i], range: totalTxt.range(of: texts[i]))
+        }
+        
+        self.attributedText = attTxt
+        
+    }
+    
+    
 }

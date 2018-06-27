@@ -10,14 +10,8 @@ import UIKit
  
 class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
     var paymentResultView: PaymentResultView!
-    
-    var month: Int = 0
      
-    var sum: Double = 0
-    
-    var simList: [Any]!
-    
-    var order: Order!
+    var bill: Bill!
       
     var scrollView: UIScrollView!
     
@@ -78,11 +72,10 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
             
             let w = UILabel.getWidth(titleTxt[i], UIFont.systemFont(ofSize: 14, weight: .bold))
             
-            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, text: titleTxt[i])
-            titleLbl.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, fontsize:14, weight:.bold, text: titleTxt[i])
             detailCell1.addSubview(titleLbl)
             
-            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: [order.order_no,order.order_type][i])
+            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: [bill.order_no,bill.order_type][i])
             detailCell1.addSubview(valueLbl)
         }
         
@@ -97,11 +90,10 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
             
             let w = UILabel.getWidth(titleTxt[i], UIFont.systemFont(ofSize: 14, weight: .bold))
             
-            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, text: titleTxt[i])
-            titleLbl.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, fontsize:14, weight:.bold, text: titleTxt[i])
             detailCell2.addSubview(titleLbl)
             
-            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["\(month)个月","\(simList.count)张"][i])
+            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["\(bill.month)个月","\(bill.simList.count)张"][i])
             detailCell2.addSubview(valueLbl)
         }
     }
@@ -112,18 +104,17 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
         detailView.addSubview(detailCell3)
         
         let titleW = UILabel.getWidth("套餐明细:", UIFont.systemFont(ofSize: 14, weight: .bold))
-        let titleLbl = UILabel(frame: CGRect(x: 15, y: 15, width: titleW, height: 20), color: UIColor.black, text: "套餐明细:")
-        titleLbl.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        let titleLbl = UILabel(frame: CGRect(x: 15, y: 15, width: titleW, height: 20), color: UIColor.black, fontsize:14, weight:.bold, text: "套餐明细:")
         detailCell3.addSubview(titleLbl)
         
         let xArr: [CGFloat] = [15, 150, 200, 280]
         let wArr: [CGFloat] = [135, 50, 80, 200]
-        for i in 0 ..< order.packageSumList.count {
+        for i in 0 ..< bill.packageSumList.count {
             let cell = UIView(frame: CGRect(x: 0, y: CGFloat(i) * 40 + titleLbl.frame.maxY + 10, width: KWidth, height: 30))
             
             detailCell3.addSubview(cell)
             
-            let detail = order.packageSumList[i]
+            let detail = bill.packageSumList[i]
             
             let txtArr = ["\(detail.agent) \(detail.name)", "\(detail.count)张","单张\(detail.price)元","总计:¥\(detail.sum)"]
             for j in 0 ..< txtArr.count {
@@ -154,15 +145,14 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
             
             let w = UILabel.getWidth(titleTxt[i], UIFont.systemFont(ofSize: 14, weight: .bold))
             
-            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, text: titleTxt[i])
-            titleLbl.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, fontsize:14, weight:.bold, text: titleTxt[i]) 
             paymentView.addSubview(titleLbl)
             
-            for detail in order.packageSumList {
-                sum += detail.sum
+            for detail in bill.packageSumList {
+                bill.sum += detail.sum
             }
             
-            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["¥\(sum)","¥\(order.balance)", ""][i])
+            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["¥\(bill.sum)","¥\(bill.balance)", ""][i])
             paymentView.addSubview(valueLbl)
             
             
@@ -206,14 +196,14 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
     
     @objc func payBtnClicked() {
         
-        if order.balance < sum && selectedMethodBtn.tag == 500  {
+        if bill.balance < bill.sum && selectedMethodBtn.tag == 500  {
             
             ProgressHUD.showError(withStatus: "余额不足")
             return
         }
         
         ProgressHUD.show(withStatus: "支付中...")
-        APITool.request(target: .confirmOrder(simNoList: simList, sim_type: 1, month: month, order_no: order.order_no, sum_fee: sum, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
+        APITool.request(target: .confirmOrder(simNoList: bill.simList, sim_type: 1, month: bill.month, order_no: bill.order_no, sum_fee: bill.sum, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
             print("结果",result)
             self!.showPaymentResultView(.success, "付款成功")
             
