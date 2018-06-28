@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setRootViewCottroller()
         ProgressHUD.setDefaultMaskType(.black)
+        ProgressHUD.setMinimumDismissTimeInterval(1)
+        ProgressHUD.setMaximumDismissTimeInterval(5)
         return true
     }
     private func setRootViewCottroller() {

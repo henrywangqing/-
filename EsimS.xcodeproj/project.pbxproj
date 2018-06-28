@@ -100,7 +100,6 @@
 		43358FA820A1910B00ED07EA /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43358FA420A1910B00ED07EA /* LaunchScreen.strings */; };
 		43358FA920A1910B00ED07EA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43358FA620A1910B00ED07EA /* Localizable.strings */; };
 		43358FAC20A191FE00ED07EA /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43358FAA20A191FE00ED07EA /* LaunchScreen.strings */; };
-		4345430920DCCE4B00E75A35 /* CardDetailVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345430820DCCE4B00E75A35 /* CardDetailVc.swift */; };
 		4345430B20DE4E2E00E75A35 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345430A20DE4E2E00E75A35 /* ProgressHUD.swift */; };
 		4354E5B720CE1A6D0064D0FC /* AccountVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354E5B620CE1A6D0064D0FC /* AccountVc.swift */; };
 		439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1ACB20A02FD50020345D /* AppDelegate.swift */; };
@@ -263,7 +262,6 @@
 		43358FA520A1910B00ED07EA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		43358FA720A1910B00ED07EA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		43358FAB20A191FE00ED07EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = LaunchScreen.strings; sourceTree = "<group>"; };
-		4345430820DCCE4B00E75A35 /* CardDetailVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailVc.swift; sourceTree = "<group>"; };
 		4345430A20DE4E2E00E75A35 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		4354E5B620CE1A6D0064D0FC /* AccountVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVc.swift; sourceTree = "<group>"; };
 		439C1AC820A02FD50020345D /* EsimS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsimS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -758,7 +756,6 @@
 				4309AEE520C7BB1100EC81F3 /* CardInquiryVc.swift */,
 				4309AEFA20C7E7B200EC81F3 /* CardManagementVc.swift */,
 				4309AEFD20C8DFB300EC81F3 /* MyCardsVc.swift */,
-				4345430820DCCE4B00E75A35 /* CardDetailVc.swift */,
 				4309EF5D20AEC30E00BBEB03 /* MyOrdersVc.swift */,
 				4313AA4620E381E900508FCD /* OrderDetailVc.swift */,
 			);
@@ -1000,7 +997,6 @@
 				4309EF6820AFD01200BBEB03 /* PlanDetailCell.swift in Sources */,
 				4345430B20DE4E2E00E75A35 /* ProgressHUD.swift in Sources */,
 				439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */,
-				4345430920DCCE4B00E75A35 /* CardDetailVc.swift in Sources */,
 				4309AEFB20C7E7B200EC81F3 /* CardManagementVc.swift in Sources */,
 				4306EF2620DA575500A97ED0 /* MJRefreshBackStateFooter.m in Sources */,
 				4309EF3520A95BFC00BBEB03 /* DataManager.swift in Sources */,

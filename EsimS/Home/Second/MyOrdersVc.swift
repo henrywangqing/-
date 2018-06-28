@@ -9,46 +9,78 @@
 import UIKit
 
 class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
-    var orders = [Order]()
-
+    var ordersResult = OrdersResult()
     var tableView: UITableView!
+    var page: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "订单列表"
-        
-        refreshData()
+        setUpTableView()
+        refreshData(pageNumber: page)
     }
-    func refreshData() {
-        APITool.request(target: .orderListInquiry(pageNumber: 1, pageSize: 10), success: { (result) in
+    
+    func refreshData(pageNumber: Int) {
+        if ordersResult.orderList.count >= ordersResult.totalPage {
+            self.tableView.mj_footer.endRefreshingWithNoMoreData()
+            return
+        }
+        page += 1
+        APITool.request(target: .orderListInquiry(pageNumber: page, pageSize: 10), success: { [weak self] (result) in
+            if let resultDict = result as? NSDictionary,
+                let ordersResult = OrdersResult.deserialize(from: resultDict) {
+                print("订单列表", result)
+                for order in ordersResult.orderList {
+                    self!.ordersResult.orderList.append(order)
+                }
+                self!.tableView.reloadData() 
+            }
             
-            print(result)
-            
-        }) { (error) in
+            self!.tableView.mj_footer.endRefreshing() 
+        }) { [weak self] (error) in
             print(error)
+            self!.tableView.mj_footer.endRefreshing()
         }
     }
 
     func setUpTableView() {
-        tableView = UITableView(frame: view.bounds, style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: KWidth, height: view.height - KStatusBarH - (navigationController?.navigationBar.height)!), style: .grouped)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         tableView.rowHeight = 160
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedSectionHeaderHeight = 30
+        tableView.estimatedSectionHeaderHeight = 1
+        tableView.estimatedSectionFooterHeight = 1
         tableView.separatorStyle = .none
+        
+        let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {[weak self] in
+            self!.refreshData(pageNumber: self!.page)
+            
+        })
+        footer?.setTitle("加载中", for: .refreshing)
+        footer?.setTitle(nil, for: .idle)
+        footer?.activityIndicatorViewStyle = .gray
+        tableView.mj_footer = footer
         view.addSubview(tableView)
         
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orders.count
+        return ordersResult.orderList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: OrderCell!
-        cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! OrderCell
+        var cell: OrderCell! = tableView.dequeueReusableCell(withIdentifier: "cell") as? OrderCell
         if cell == nil {
             cell = OrderCell.init(style: .default, reuseIdentifier: "cell")
         }
-        cell.order = orders[indexPath.row]
+        cell.order = ordersResult.orderList[indexPath.row]
+        
         return cell
     }
     
@@ -58,5 +90,4 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         tabBarController?.tabBar.isHidden = true
     }
     
-
 }

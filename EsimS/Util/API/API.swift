@@ -104,7 +104,7 @@ enum APIService {
 extension APIService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: "http://192.168.1.131:8081/api/")!
+        return URL(string: "http://120.79.199.18:8082/api/")!
     }
 //    192.168.1.176  120.79.199.18
     public var path: String {

@@ -27,5 +27,15 @@ struct Order: HandyJSON {
     var sum: Int = 0
 }
 
+struct OrdersResult: HandyJSON {
+    var orderList = [Order]()
+    var totalPage: Int = 1
+}
+
+
+
+
+
+
 
 
