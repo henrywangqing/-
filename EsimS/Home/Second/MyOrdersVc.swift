@@ -48,9 +48,10 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         tableView.rowHeight = 160
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedSectionHeaderHeight = 1
+        tableView.estimatedSectionHeaderHeight = 10
         tableView.estimatedSectionFooterHeight = 1
         tableView.separatorStyle = .none
+    
         
         let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {[weak self] in
             self!.refreshData(pageNumber: self!.page)
@@ -63,12 +64,12 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
         
     }
-    
+//    MARK: tableViewDelegate
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+        return 20
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,6 +83,12 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         cell.order = ordersResult.orderList[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = OrderDetailVc()
+        vc.order = ordersResult.orderList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
