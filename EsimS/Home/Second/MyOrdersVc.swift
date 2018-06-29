@@ -25,6 +25,7 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             return
         }
         page += 1
+        ProgressHUD.showInfo(withStatus: "获取中...")
         APITool.request(target: .orderListInquiry(pageNumber: page, pageSize: 10), success: { [weak self] (result) in
             if let resultDict = result as? NSDictionary,
                 let ordersResult = OrdersResult.deserialize(from: resultDict) {
@@ -38,7 +39,7 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             self!.tableView.mj_footer.endRefreshing() 
         }) { [weak self] (error) in
             print(error)
-            self!.tableView.mj_footer.endRefreshing()
+            self?.tableView.mj_footer.endRefreshing()
         }
     }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class MainTabBarVc: UITabBarController {
-    let names = ["总览", "服务", "商城", "设置"]
+    let names = ["总览", "服务", "设置"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,11 @@ class MainTabBarVc: UITabBarController {
         addChildViewController(nav1)
         let nav2 = UINavigationController(rootViewController: SecondVc())
         addChildViewController(nav2)
-        let nav3 = UINavigationController(rootViewController: ThirdVc())
-        addChildViewController(nav3)
+//        let nav3 = UINavigationController(rootViewController: ThirdVc())
+//        addChildViewController(nav3)
         let nav4 = UINavigationController(rootViewController: FourthVc())
         addChildViewController(nav4)
-        viewControllers = [nav1, nav2, nav3, nav4]
+        viewControllers = [nav1, nav2, nav4]
       
         for i in 0..<viewControllers!.count {
             if let vc = viewControllers![i] as? UINavigationController {

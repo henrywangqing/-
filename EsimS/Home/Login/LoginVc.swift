@@ -68,6 +68,7 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
                 accountTf.text = DataManager.accounts().count > 0 ? DataManager.accounts()[0].username: ""
             }else {
                 pwdTf = tf
+                pwdTf.isSecureTextEntry = true
                 pwdTf.returnKeyType = .done
             }
             
@@ -119,6 +120,8 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
     }
     
     @objc func loginBtnClicked() {
+        view.endEditing(true)
+        
         ProgressHUD.show(withStatus: "登录中...")
         
         APITool.request(target: .login(username: accountTf.text!, password: (pwdTf.text?.md5())!), success: { (result) in
@@ -152,6 +155,9 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         let forgetBtn = UIButton(frame: CGRect(x: KWidth - 30 - forgetBtnW, y: regBtn.y, width: forgetBtnW, height: regBtn.height),
                               title: "忘记密码？", imageName: "", titleColor: KBlueColor, fontsize: 14, target: self, selector: #selector(forgetBtnClicked))
         footer.addSubview(forgetBtn)
+        
+        regBtn.isHidden = true
+        forgetBtn.isHidden = true
      
     }
 }

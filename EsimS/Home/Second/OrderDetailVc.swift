@@ -18,7 +18,7 @@ class OrderDetailVc: BaseVc {
     
     let cellH: CGFloat = 16
     
-    var titleArr = [["订单号码:", "下单时间:", "订单状态:"], ["支付方式:", "支付金额:", "支付时间:", "支付状态:"], ["订单类型:", "总卡数:", "期限（月）:", "到期日期:", "是否开机:"]]
+    var titleArr = [["订单号码:", "下单时间:", "订单状态:"], ["支付方式:", "支付金额:", "支付时间:", "是否支付:"], ["订单类型:", "总卡数:", "期限（月）:", "到期日期:", "是否开机:"]]
     
     var valueArr = [[String]] ()
     
@@ -39,7 +39,7 @@ class OrderDetailVc: BaseVc {
     }
     
     func setUpData() {
-        valueArr = [[order.order_no, NSString.yyyyMMddHHmmssFromString(order.create_time), order.order_status], [order.pay_type, "¥\(String(format: "%.2f",order.fee))", NSString.yyyyMMddHHmmssFromString(order.pay_time), order.pay_status], [order.order_type, "\(order.sum)张", "\(order.month)", NSString.yyyyMMddFromString(order.expire_time), order.power_on == true ? "是" : "否"]]
+        valueArr = [[order.order_no, NSString.yyyyMMddHHmmssFromString(order.create_time), order.order_status_info], [order.pay_type_info, "¥\(String(format: "%.2f",order.fee))", NSString.yyyyMMddHHmmssFromString(order.pay_time), order.pay_status == true ? "是" : "否"], [order.order_type_info, "\(order.sum)张", "\(order.month)", NSString.yyyyMMddFromString(order.expire_time), order.power_on == true ? "是" : "否"]]
         
     }
     

@@ -28,7 +28,7 @@ let provider = MoyaProvider<APIService>(requestClosure: requestTimeoutClosure)
 
 // 网络请求结构体
 struct APITool {
-    
+  
     // 发送网络请求
     static func request(
         target: APIService,
@@ -46,7 +46,7 @@ struct APITool {
                 
                 do {
                     let data = try moyaResponse.mapJSON()
-                   
+                    
                     if let dic = data as? NSDictionary,
                        let code = dic["code"] as? Int,
                        code == 200,
@@ -56,22 +56,22 @@ struct APITool {
                         return
     
                     }
-                    failure(data)
+                    
                     if let dic = data as? NSDictionary,
                         let msg = dic["message"] as? String {
                         ProgressHUD.showError(withStatus: Mystring(msg))
                     }
-                    
+                    failure(data)
                 } catch {
                     let error = MoyaError.jsonMapping(moyaResponse)
-                    failure(error)
                     ProgressHUD.showError(withStatus: error.errorDescription)
+                    failure(error)
                 }
                 break
             case let .failure(error):
                 ProgressHUD.dismiss()
-                failure(error)
                 ProgressHUD.showError(withStatus: error.errorDescription)
+                failure(error)
                 break
             }
         }
@@ -104,9 +104,9 @@ enum APIService {
 extension APIService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: "http://120.79.199.18:8082/api/")!
+        return URL(string: "http://192.168.1.131:8081/api/")!
     }
-//    192.168.1.176  120.79.199.18
+//    192.168.1.176  120.79.199.18 bema_test Bema_test123
     public var path: String {
         switch self {
         case .login:

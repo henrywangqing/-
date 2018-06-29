@@ -75,6 +75,8 @@ class CardInquiryVc: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITable
     }
     
     func requestData() {
+        view.endEditing(true)
+        ProgressHUD.showInfo(withStatus: "查询中...")
         APITool.request(target: .singleCardInquiry(sim_no: inquiryTf.text!), success: { [weak self] (result) in
             
             print("结果", result)
@@ -82,6 +84,8 @@ class CardInquiryVc: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITable
                 let cards = [Card].deserialize(from: resultDict) {
                 if cards.count > 0 {
                     self!.presentCardManagementVc(card: cards.first!!)
+                }else {
+                    ProgressHUD.showError(withStatus: "查不到信息")
                 }
             }
             

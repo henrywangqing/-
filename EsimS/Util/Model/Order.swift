@@ -18,10 +18,10 @@ struct Order: HandyJSON {
     var month: Int = 0
     var order_id: Int = 0
     var order_no: String = ""
-    var order_status: String = ""
-    var order_type: String = ""
-    var pay_status: String = ""
-    var pay_type: String = ""
+    var order_status_info: String = ""
+    var order_type_info: String = ""
+    var pay_status: Bool = false
+    var pay_type_info: String = ""
     var pay_time: String = ""
     var power_on: Bool = true
     var sum: Int = 0

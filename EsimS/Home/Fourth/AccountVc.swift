@@ -11,7 +11,8 @@ import UIKit
 class AccountVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView!
-    
+    let titleArr = ["账号ID", "用户名", "邮箱", "电话"]
+    let valueArr = [DataManager.currentAccount().account, DataManager.currentAccount().username, DataManager.currentAccount().email, DataManager.currentAccount().mobile]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,12 +22,13 @@ class AccountVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return titleArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.textLabel?.text = titleArr[indexPath.row]
+        cell.detailTextLabel?.text = valueArr[indexPath.row]
         return cell
     }
     

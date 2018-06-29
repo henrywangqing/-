@@ -15,7 +15,8 @@ class SecondVc: BaseVc {
     
     var serviceView: UIView!
     
-    let toolsArr = ["单卡查询","卡片续费","卡片列表","我的订单","提交工单","常见问题","我的消息"]
+//    let toolsArr = ["单卡查询","卡片续费","卡片列表","我的订单","提交工单","常见问题","我的消息"]
+    let toolsArr = ["单卡查询","卡片续费","卡片列表","我的订单"]
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,29 +45,26 @@ class SecondVc: BaseVc {
         headLbl.text = "实用工具"
         scrollView.addSubview(headLbl)
         
-        toolsView = UIView(frame: CGRect(x: 10, y: headLbl.frame.maxY + 10, width: KWidth - 20, height: KWidth - 20))
+        toolsView = UIView(frame: CGRect(x: 10, y: headLbl.frame.maxY + 10, width: KWidth - 20, height: (KWidth - 20)/3 * CGFloat(toolsArr.count%3 == 0 ? toolsArr.count/3 : toolsArr.count/3 + 1)))
         toolsView.backgroundColor = UIColor.white
         toolsView.setShadow()
         scrollView.addSubview(toolsView)
         
-        let line1 = UIView(frame: CGRect(x: 5, y: toolsView.height/3.0, width: toolsView.width - 10, height: 0.5))
-        line1.backgroundColor = UIColor.lightGray
-        toolsView.addSubview(line1)
+        for i in 1 ..< 3 {
+            let line = UIView(frame: CGRect(x: toolsView.width/3.0 * CGFloat(i), y: 5, width: 0.5, height: toolsView.height - 10))
+            line.backgroundColor = UIColor.lightGray
+            toolsView.addSubview(line)
+        }
+        for i in 1 ..< (toolsArr.count%3 == 0 ? toolsArr.count/3 : toolsArr.count/3 + 1) {
+            let line = UIView(frame: CGRect(x: 5, y: toolsView.width/3.0 * CGFloat(i), width: toolsView.width - 10, height: 0.5))
+            line.backgroundColor = UIColor.lightGray
+            toolsView.addSubview(line)
+        }
         
-        let line2 = UIView(frame: CGRect(x: 5, y: toolsView.height/3.0 * 2, width: toolsView.width - 10, height: 0.5))
-        line2.backgroundColor = UIColor.lightGray
-        toolsView.addSubview(line2)
         
-        let line3 = UIView(frame: CGRect(x: toolsView.width/3.0, y: 5, width: 0.5, height: toolsView.height - 10))
-        line3.backgroundColor = UIColor.lightGray
-        toolsView.addSubview(line3)
-        
-        let line4 = UIView(frame: CGRect(x: toolsView.width/3.0 * 2, y: 5, width: 0.5, height: toolsView.height - 10))
-        line4.backgroundColor = UIColor.lightGray
-        toolsView.addSubview(line4)
-        
+ 
         for i in 0 ..< toolsArr.count {
-            let cell = UIView(frame: CGRect(x: CGFloat(i%3) * toolsView.width/3.0, y: CGFloat(i/3) * toolsView.height/3.0, width: toolsView.width/3.0, height: toolsView.height/3.0))
+            let cell = UIView(frame: CGRect(x: CGFloat(i%3) * toolsView.width/3.0, y: CGFloat(i/3) * toolsView.width/3.0, width: toolsView.width/3.0, height: toolsView.width/3.0))
             toolsView.addSubview(cell)
             
             let imageView = UIImageView(image: UIImage(named: toolsArr[i]))

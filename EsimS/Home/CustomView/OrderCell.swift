@@ -58,9 +58,9 @@ class OrderCell: UITableViewCell {
         
         orderNoLbl.set(frame: CGRect(x: 15, y: 10, width: 300, height: 20), color: UIColor.black, fontsize: 14, weight: .regular, text: "订单号码： \(order.order_no)")
         
-        orderStatusLbl.set(frame: CGRect(x: KWidth - 200 - 20, y: orderNoLbl.y, width: 200, height: orderNoLbl.height), color: orderNoLbl.textColor, alignment: .right, fontsize: 15, weight: .bold, text: order.order_status)
+        orderStatusLbl.set(frame: CGRect(x: KWidth - 200 - 20, y: orderNoLbl.y, width: 200, height: orderNoLbl.height), color: orderNoLbl.textColor, alignment: .right, fontsize: 15, weight: .bold, text: order.order_status_info)
         
-        orderTypeLbl.set(frame: CGRect(x: 25, y: 5, width: 400, height: 20), color: KColor(0, 0, 0, 0.8), fontsize: 14, weight: .regular, text: "订单类型: \(order.order_type)")
+        orderTypeLbl.set(frame: CGRect(x: 25, y: 5, width: 400, height: 20), color: KColor(0, 0, 0, 0.8), fontsize: 14, weight: .regular, text: "订单类型: \(order.order_type_info)")
         
         orderTimeLbl.set(frame: CGRect(x: orderTypeLbl.x, y: orderNoLbl.frame.maxY + 5, width: orderTypeLbl.width, height: 20), color: orderTypeLbl.textColor, fontsize: 14, weight: .regular, text: "下单时间: \(NSString.yyyyMMddHHmmssFromString(order.create_time))")
         

@@ -150,7 +150,6 @@ class FirstVc: BaseVc {
             self!.scrollView.mj_header.endRefreshing()
         }
     }
-    
 }
 
 
