@@ -7,3 +7,6 @@
 */
 "delete" = "删除";
 "user name or password is incorrect!" = "用户名或密码不正确！";
+"you have been loged out,please login in again!" = "您已退出登录，请重新登录！";
+
+"AgreementText" = "";

@@ -8,10 +8,11 @@
 
 import HandyJSON
 struct Bill: HandyJSON {
-    var month: Int = 0
-    var sum: Double = 0
+    var month: Int = 0  
     var balance: Double = 0 
+    var order_id: String = ""
     var order_no: String = ""
+    var sumFee: Double = 0
     var order_type: String = ""
     var simList = [Int]()
     var packageSumList = [BillDetail]()

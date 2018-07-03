@@ -92,6 +92,15 @@ class FourthVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func logoutRequest() {
+        
+        APITool.request(target: .logout(token: DataManager.currentAccount().token), success: { [weak self] (result) in
+            print("退出", result)
+            self!.logout()
+        }) { (error) in
+            print(error)
+        }
+    }
     func logout() {
         DataManager.destroyCurrentUserID()
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: LoginVc())

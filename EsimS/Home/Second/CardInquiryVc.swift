@@ -44,13 +44,16 @@ class CardInquiryVc: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-       
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+        
         if indexPath.section == 0 {
             cell.selectionStyle = .none
-            cell.textLabel?.text = "ICCID/IMSI"
-            let x = 40.0 + UILabel.getWidth("ICCID/IMSI", UIFont.systemFont(ofSize: 17))
-            inquiryTf = UITextField(frame: CGRect(x: x, y: 0, width: KWidth - x - 20,
+            let titleW = UILabel.getWidth("ICCID/IMSI", UIFont.systemFont(ofSize: 17))
+            let titleLbl = UILabel(frame: CGRect(x: 15, y: (tableView.rowHeight - 25)/2.0, width: titleW, height: 25),
+                                   color: UIColor.black, fontsize: 17, text: "ICCID/IMSI")
+            cell.contentView.addSubview(titleLbl)
+            
+            let inquiryTfX = 20 + titleLbl.frame.maxX
+            inquiryTf = UITextField(frame: CGRect(x: inquiryTfX, y: 0, width: KWidth - inquiryTfX - 20,
                                                height: tableView.rowHeight),
                                  fontsize: 17, placeholder: "请输入ICCID/IMSI")
             inquiryTf.delegate = self
@@ -59,6 +62,7 @@ class CardInquiryVc: BaseVc, UITextFieldDelegate, UITableViewDataSource, UITable
             cell.addSubview(inquiryTf)
             
         }else {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             cell.textLabel?.text = "查询"
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.textColor = UIColor.gray

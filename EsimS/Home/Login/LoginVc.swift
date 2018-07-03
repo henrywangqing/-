@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import CryptoSwift
+import CryptoSwift 
+import YYText
 
 class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +21,7 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         title = "登录"
         setUpTableView()
+ 
     }
     func setUpTableView() {
         tableView = UITableView(frame: view.bounds, style: .grouped)
@@ -51,17 +53,23 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+        
         if indexPath.section == 0 {
             cell.selectionStyle = .none
-            cell.textLabel?.text = ["账户","密码"][indexPath.row]
-            let x = 40.0 + UILabel.getWidth(["账户","密码"][indexPath.row], UIFont.systemFont(ofSize: 17))
-            let tf = UITextField(frame: CGRect(x: x, y: 0, width: KWidth - x - 20,
+            
+            let titleTxt = ["账户","密码"][indexPath.row]
+            let titleW = UILabel.getWidth(titleTxt, UIFont.systemFont(ofSize: 17))
+            let titleLbl = UILabel(frame: CGRect(x: 15, y: (tableView.rowHeight - 25)/2.0, width: titleW, height: 25),
+                                   color: UIColor.black, fontsize: 17, text: titleTxt)
+            cell.contentView.addSubview(titleLbl)
+            
+            let tfX = titleLbl.frame.maxX + 20
+            let tf = UITextField(frame: CGRect(x: tfX, y: 0, width: KWidth - tfX - 20,
                                                height: tableView.rowHeight),
                                  fontsize: 17, placeholder: ["邮箱或手机号","密码"][indexPath.row])
             tf.delegate = self
             tf.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
-            cell.addSubview(tf)
+            cell.contentView.addSubview(tf)
             if indexPath.row == 0 {
                 accountTf = tf
                 accountTf.returnKeyType = .next
@@ -73,6 +81,8 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             }
             
         }else {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+            
             cell.textLabel?.textColor = UIColor.gray
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "登录"
@@ -138,7 +148,6 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
             
         }) { (error) in
             print(error)
-            ProgressHUD.dismiss() 
         }
     }
     
@@ -158,9 +167,34 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         
         regBtn.isHidden = true
         forgetBtn.isHidden = true
-     
+        
+//        MARK: agreementLbl
+        let agreeLabel = YYLabel(frame: CGRect(x: 0, y: 30, width: KWidth, height: 25))
+        
+        footer.addSubview(agreeLabel)
+   
+        let agreeLblTxt = "登录即视为同意 《白马物联用户协议》"
+        let totalTxt = agreeLblTxt as NSString
+        let range = totalTxt.range(of: "《白马物联用户协议》")
+        let agreeLabelAttri = NSMutableAttributedString(string:agreeLblTxt)
+        //设置文本size
+        agreeLabelAttri.yy_setTextHighlight(range, color: KBlueColor,
+                                            backgroundColor: nil)
+        { [weak self] (containerView, text, range, rect) in
+           self!.navigationController?.pushViewController(AgreementVc(), animated: true)
+        }
+        //为文本设置属性
+        agreeLabelAttri.yy_font = UIFont.systemFont(ofSize: 13)
+        agreeLabel.attributedText = agreeLabelAttri
+        agreeLabel.textAlignment = .center
+        
     }
 }
+
+
+
+
+
 
 
 

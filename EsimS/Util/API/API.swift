@@ -38,7 +38,6 @@ struct APITool {
         
         provider.request(target) { result in
             
-            
             switch result {
                 
             case let .success(moyaResponse):
@@ -56,10 +55,10 @@ struct APITool {
                         return
     
                     }
-                    
-                    if let dic = data as? NSDictionary,
-                        let msg = dic["message"] as? String {
-                        ProgressHUD.showError(withStatus: Mystring(msg))
+                    else if let dic = data as? NSDictionary,
+                        let message = dic["message"] as? String,
+                        let code = dic["code"] as? Int {
+                        manageError(code: code, message: message)
                     }
                     failure(data)
                 } catch {
@@ -89,11 +88,10 @@ private extension String {
 enum APIService {
     case login(username: String, password: String)
     case getInfo
-    case logout
+    case logout(token: String)
     case getRenewedCardInfo(simNoList:[Any], sim_type: Int, month: Int, pageNumber:Int, pageSize:Int)
     case submitOrder(simNoList:[Any], month: Int)
-    case confirmOrder(simNoList:[Any], sim_type:Int, month: Int
-        , order_no: String, sum_fee: Double, pay_type: Int, pay_status: Bool)
+    case confirmOrder(simNoList:[Any], order_id: String, sum_fee: Double, pay_type: Int, pay_status: Bool)
     case dashBoardInfo
     case singleCardInquiry(sim_no: String)
     case cardListInquiry(pageNumber: Int, pageSize: Int)
@@ -104,22 +102,22 @@ enum APIService {
 extension APIService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: "http://192.168.1.131:8081/api/")!
+        return URL(string: "http://120.79.199.18:8082/api/")!
     }
-//    192.168.1.176  120.79.199.18 bema_test Bema_test123
+//    192.168.1.131  120.79.199.18 bema_test Bema_test123
     public var path: String {
         switch self {
         case .login:
             return "login/login"
         case .getInfo:
             return "user/getInfo"
-        case .logout:
-            return "user/logout"
+        case .logout(_):
+            return "login/logout"
         case .getRenewedCardInfo( _, _, _, _, _):
             return "app/chargeList"
         case .submitOrder( _, _):
             return "app/orderInfo"
-        case .confirmOrder( _, _, _, _, _, _, _):
+        case .confirmOrder( _, _, _, _, _):
             return "app/createOrder"
         case .dashBoardInfo:
             return "app/dashBoardInfo"
@@ -140,13 +138,13 @@ extension APIService: TargetType {
             return .post
         case .getInfo:
             return .get
-        case .logout:
+        case .logout(_):
             return .get
         case .getRenewedCardInfo( _, _, _, _, _):
             return .post
         case .submitOrder( _, _):
             return .post
-        case .confirmOrder( _, _, _, _, _, _, _):
+        case .confirmOrder( _, _, _, _, _):
             return .post
         case .dashBoardInfo:
             return .get
@@ -167,15 +165,14 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
         case .getInfo:
             return .requestPlain
-        case .logout:
-            return .requestPlain
+        case .logout(let token):
+            return .requestParameters(parameters: ["token": token], encoding: URLEncoding.default)
         case .getRenewedCardInfo(let simNoList, let sim_type, let month, let pageNumber, let pageSize):
-             
             return .requestParameters(parameters: ["simNoList": simNoList, "sim_type": sim_type, "month": month, "pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         case .submitOrder(let simNoList, let month):
             return .requestParameters(parameters: ["simNoList": simNoList, "month": month], encoding: JSONEncoding.default)
-        case .confirmOrder(let simNoList, let sim_type, let month, let order_no, let sum_fee, let pay_type, let pay_status):
-            return .requestParameters(parameters: ["simNoList": simNoList, "sim_type": sim_type, "month": month, "order_no": order_no, "sum_fee": sum_fee, "pay_type": pay_type, "pay_status": pay_status], encoding: JSONEncoding.default)
+        case .confirmOrder(let simNoList, let order_id, let sum_fee, let pay_type, let pay_status):
+            return .requestParameters(parameters: ["simNoList": simNoList, "order_id": order_id, "sum_fee": sum_fee, "pay_type": pay_type, "pay_status": pay_status], encoding: JSONEncoding.default)
         case .dashBoardInfo:
             return .requestPlain
         case .singleCardInquiry(let sim_no): 

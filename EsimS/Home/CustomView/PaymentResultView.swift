@@ -18,7 +18,7 @@ protocol PaymentResultViewDelegate: NSObjectProtocol {
 }
 
 class PaymentResultView: UIView {
-    let whiteViewH: CGFloat = KHeight - 100
+    let whiteViewH: CGFloat = 400
     var whiteView: UIView!
     var paymentState: KPaymentState!
     var resultString: String!

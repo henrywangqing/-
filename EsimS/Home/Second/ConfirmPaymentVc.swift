@@ -141,18 +141,16 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
         scrollView.addSubview(paymentView)
         
         let titleTxt = ["费用总计:","账户余额:","支付方式:"]
-        for i in 0 ..< 3 {
+       
+        for i in 0 ..< titleTxt.count {
             
             let w = UILabel.getWidth(titleTxt[i], UIFont.systemFont(ofSize: 14, weight: .bold))
             
             let titleLbl = UILabel(frame: CGRect(x: 15, y: 15 + 30 * CGFloat(i), width: w, height: 20), color: UIColor.black, fontsize:14, weight:.bold, text: titleTxt[i]) 
             paymentView.addSubview(titleLbl)
             
-            for detail in bill.packageSumList {
-                bill.sum += detail.sum
-            }
             
-            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["¥\(bill.sum)","¥\(bill.balance)", ""][i])
+            let valueLbl = UILabel(frame: CGRect(x: titleLbl.frame.maxX + 10, y: titleLbl.y, width: 400, height: titleLbl.height), color: KColor(0, 0, 0, 0.8), fontsize: 14, text: ["¥\(bill.sumFee)","¥\(bill.balance)", ""][i])
             paymentView.addSubview(valueLbl)
             
             
@@ -196,20 +194,20 @@ class ConfirmPaymentVc: BaseVc, PaymentResultViewDelegate {
     
     @objc func payBtnClicked() {
         
-        if bill.balance < bill.sum && selectedMethodBtn.tag == 500  {
+        if bill.balance < bill.sumFee && selectedMethodBtn.tag == 500  {
             
             ProgressHUD.showError(withStatus: "余额不足")
             return
         }
         
         ProgressHUD.show(withStatus: "支付中...")
-        APITool.request(target: .confirmOrder(simNoList: bill.simList, sim_type: 1, month: bill.month, order_no: bill.order_no, sum_fee: bill.sum, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
+        APITool.request(target: .confirmOrder(simNoList: bill.simList, order_id: bill.order_id, sum_fee: bill.sumFee, pay_type: selectedMethodBtn.tag - 499, pay_status: true), success: { [weak self] (result) in
             print("结果",result)
             self!.showPaymentResultView(.success, "付款成功")
             
         }) { [weak self] (error) in
             print(error)
-            self!.showPaymentResultView(.success, "\(error)")
+            self!.showPaymentResultView(.failure, "\(error)")
         }
         
     }

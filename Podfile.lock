@@ -2,9 +2,6 @@ PODS:
   - Alamofire (4.7.2)
   - CryptoSwift (0.9.0)
   - HandyJSON (4.1.1)
-  - mob_smssdk (3.1.0):
-    - MOBFoundation
-  - MOBFoundation (3.1.5)
   - Moya (11.0.2):
     - Moya/Core (= 11.0.2)
   - Moya/Core (11.0.2):
@@ -12,35 +9,34 @@ PODS:
     - Result (~> 3.0)
   - Result (3.2.4)
   - SVProgressHUD (2.2.5)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - CryptoSwift
   - HandyJSON (~> 4.1.1)
-  - mob_smssdk
   - Moya (~> 11.0)
   - SVProgressHUD
+  - YYText
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - CryptoSwift
     - HandyJSON
-    - mob_smssdk
-    - MOBFoundation
     - Moya
     - Result
     - SVProgressHUD
+    - YYText
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
   HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
-  mob_smssdk: 50a3c764232919f78578d911a60afc142ee7a405
-  MOBFoundation: d961251ce6de54917f678dc711962d1385ae7ee1
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 856f8908ac3c5cf13aff7055bf68cbd51caa2871
+PODFILE CHECKSUM: 1e94f40d51b1ef28d497280e99e254d977eff6ec
 
 COCOAPODS: 1.5.0

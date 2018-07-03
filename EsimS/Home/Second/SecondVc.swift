@@ -61,8 +61,6 @@ class SecondVc: BaseVc {
             toolsView.addSubview(line)
         }
         
-        
- 
         for i in 0 ..< toolsArr.count {
             let cell = UIView(frame: CGRect(x: CGFloat(i%3) * toolsView.width/3.0, y: CGFloat(i/3) * toolsView.width/3.0, width: toolsView.width/3.0, height: toolsView.width/3.0))
             toolsView.addSubview(cell)

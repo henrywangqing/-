@@ -20,6 +20,7 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
     }
     
     func refreshData(pageNumber: Int) {
+        
         if ordersResult.orderList.count >= ordersResult.totalPage {
             self.tableView.mj_footer.endRefreshingWithNoMoreData()
             return
@@ -29,11 +30,14 @@ class MyOrdersVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         APITool.request(target: .orderListInquiry(pageNumber: page, pageSize: 10), success: { [weak self] (result) in
             if let resultDict = result as? NSDictionary,
                 let ordersResult = OrdersResult.deserialize(from: resultDict) {
-                print("订单列表", result)
+                print("订单列表", resultDict)
                 for order in ordersResult.orderList {
                     self!.ordersResult.orderList.append(order)
+                    
                 }
-                self!.tableView.reloadData() 
+                self!.ordersResult.totalPage = ordersResult.totalPage
+                self!.tableView.reloadData()
+                
             }
             
             self!.tableView.mj_footer.endRefreshing() 
