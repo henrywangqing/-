@@ -107,6 +107,7 @@
 		4356992F20EA1E3E00483930 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356992E20EA1E3D00483930 /* ErrorManager.swift */; };
 		4356993120EB370700483930 /* AgreementVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993020EB370700483930 /* AgreementVc.swift */; };
 		4356993420EB438300483930 /* Useragreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 4356993320EB438300483930 /* Useragreement.html */; };
+		4356993620EC675B00483930 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993520EC675B00483930 /* PlayViewController.swift */; };
 		439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1ACB20A02FD50020345D /* AppDelegate.swift */; };
 		439C1AD620A02FD60020345D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD420A02FD60020345D /* LaunchScreen.storyboard */; };
 		439C1AE120A02FD60020345D /* EsimSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1AE020A02FD60020345D /* EsimSTests.swift */; };
@@ -275,6 +276,7 @@
 		4356992E20EA1E3D00483930 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		4356993020EB370700483930 /* AgreementVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVc.swift; sourceTree = "<group>"; };
 		4356993320EB438300483930 /* Useragreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Useragreement.html; sourceTree = "<group>"; };
+		4356993520EC675B00483930 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		439C1AC820A02FD50020345D /* EsimS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsimS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439C1ACB20A02FD50020345D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439C1AD220A02FD60020345D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 			children = (
 				4309EF3E20AAB00100BBEB03 /* UIViewExtension.swift */,
 				4309EF4220AAB15500BBEB03 /* UILabelExtension.swift */,
+				4356993520EC675B00483930 /* PlayViewController.swift */,
 				43E40FFF20BE90310034917B /* UIColorExtension.swift */,
 				4303061020C4DC7E00FBFDB0 /* UIButtonExtension.swift */,
 				4303061220C52AF000FBFDB0 /* UITextFieldExtension.swift */,
@@ -1059,6 +1062,7 @@
 				43358F7020A13F8E00ED07EA /* SecondVc.swift in Sources */,
 				4309EF5120AC379800BBEB03 /* CountryCode.swift in Sources */,
 				4313AA4320E36AED00508FCD /* OrderCell.swift in Sources */,
+				4356993620EC675B00483930 /* PlayViewController.swift in Sources */,
 				4356992D20E9F61600483930 /* DataExtension.swift in Sources */,
 				4306EF5F20DA5CE300A97ED0 /* JSONModel+networking.m in Sources */,
 				4309EF3F20AAB00100BBEB03 /* UIViewExtension.swift in Sources */,
