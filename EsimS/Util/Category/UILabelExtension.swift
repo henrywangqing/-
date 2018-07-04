@@ -16,7 +16,8 @@ extension UILabel {
         self.font = UIFont.systemFont(ofSize: fontsize, weight: weight)
         self.text = text
         self.backgroundColor = backgroundColor
-        
+ 
+        print(self)
     }
     
     class func getWidth(_ text: String, _ font: UIFont) -> CGFloat {
