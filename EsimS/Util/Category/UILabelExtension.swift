@@ -15,7 +15,7 @@ extension UILabel {
         self.textAlignment = alignment
         self.font = UIFont.systemFont(ofSize: fontsize, weight: weight)
         self.text = text
-        self.backgroundColor = backgroundColor
+        self.backgroundColor = UIColor.yellow
  
         print(self)
     }
