@@ -107,6 +107,7 @@
 		4356992F20EA1E3E00483930 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356992E20EA1E3D00483930 /* ErrorManager.swift */; };
 		4356993120EB370700483930 /* AgreementVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993020EB370700483930 /* AgreementVc.swift */; };
 		4356993420EB438300483930 /* Useragreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 4356993320EB438300483930 /* Useragreement.html */; };
+		4356993820ECB11D00483930 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993720ECB11D00483930 /* UIImageExtension.swift */; };
 		439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1ACB20A02FD50020345D /* AppDelegate.swift */; };
 		439C1AD620A02FD60020345D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD420A02FD60020345D /* LaunchScreen.storyboard */; };
 		439C1AE120A02FD60020345D /* EsimSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1AE020A02FD60020345D /* EsimSTests.swift */; };
@@ -275,6 +276,7 @@
 		4356992E20EA1E3D00483930 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		4356993020EB370700483930 /* AgreementVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVc.swift; sourceTree = "<group>"; };
 		4356993320EB438300483930 /* Useragreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Useragreement.html; sourceTree = "<group>"; };
+		4356993720ECB11D00483930 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		439C1AC820A02FD50020345D /* EsimS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsimS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439C1ACB20A02FD50020345D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439C1AD220A02FD60020345D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				4303061420C6658900FBFDB0 /* UIAlertControllerExtension.swift */,
 				43B0B66820CF9EBE0071A7B1 /* NSStringExtension.swift */,
 				4356992C20E9F61600483930 /* DataExtension.swift */,
+				4356993720ECB11D00483930 /* UIImageExtension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1052,6 +1055,7 @@
 				4306EF5B20DA5CE300A97ED0 /* JSONModelClassProperty.m in Sources */,
 				43B0B66B20D0FF830071A7B1 /* Bill.swift in Sources */,
 				4306EF2F20DA575500A97ED0 /* MJRefreshHeader.m in Sources */,
+				4356993820ECB11D00483930 /* UIImageExtension.swift in Sources */,
 				43B0B67120D239990071A7B1 /* DashBoardInfo.swift in Sources */,
 				4309EF5A20AE762F00BBEB03 /* Plan.swift in Sources */,
 				4306EF2E20DA575500A97ED0 /* MJRefreshFooter.m in Sources */,

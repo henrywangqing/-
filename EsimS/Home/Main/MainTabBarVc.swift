@@ -38,11 +38,12 @@ class MainTabBarVc: UITabBarController {
                 vc.tabBarItem.image = UIImage(named: names[i])
                 vc.tabBarItem.selectedImage = UIImage(named: names[i])
                 vc.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: KBlueColor], for: .selected)
-                
+                 
             }
         }
         UITabBar.appearance().tintColor = KBlueColor
         UINavigationBar.appearance().tintColor = KBlueColor
+        
     }
 }
 

@@ -32,7 +32,7 @@ class FirstVc: BaseVc {
         view.addSubview(scrollView)
         setUpAccountInfoData()
         setUpAccountInfoView()
-        setUpBusinessDiagramView()
+        setUpDashboardInfoView()
     }
     //        MARK:数据
     func setUpAccountInfoData() {
@@ -47,7 +47,7 @@ class FirstVc: BaseVc {
         }
     }
     
-    func setUpBusinessDiagramView() {
+    func setUpDashboardInfoView() {
         let headLbl = UILabel(frame: CGRect(x: 10, y: 10 + accountInfoView.frame.maxY, width: 300, height: 25))
         headLbl.font = UIFont.systemFont(ofSize: 18)
         headLbl.textColor = KColor(0, 0, 0, 0.8)

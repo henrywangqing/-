@@ -102,9 +102,9 @@ enum APIService {
 extension APIService: TargetType {
     
     public var baseURL: URL {
-        return URL(string: "http://120.79.199.18:8082/api/")!
+        return URL(string: host.online.rawValue)!
     }
-//    192.168.1.131  120.79.199.18 bema_test Bema_test123
+// bema_test Bema_test123
     public var path: String {
         switch self {
         case .login:
@@ -122,7 +122,7 @@ extension APIService: TargetType {
         case .dashBoardInfo:
             return "app/dashBoardInfo"
         case .singleCardInquiry(_):
-            return "app/getSimTableExact"
+            return "utils/getSimTableExact"
         case .cardListInquiry(_, _):
             return "app/getSimTable"
         case .orderListInquiry(_, _):
@@ -192,7 +192,7 @@ extension APIService: TargetType {
     
     public var headers: [String : String]? {
         switch self {
-        case .login:
+        case .login, .singleCardInquiry(_):
             return ["Content-type": "application/json"]
         default:
             return ["Content-type": "application/json", "X-Token": DataManager.currentAccount().token]
