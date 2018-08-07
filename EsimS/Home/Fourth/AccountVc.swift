@@ -12,13 +12,16 @@ class AccountVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView!
     let titleArr = ["账号ID", "用户名", "邮箱", "电话"]
-    let valueArr = [DataManager.currentAccount().account, DataManager.currentAccount().username, DataManager.currentAccount().email, DataManager.currentAccount().mobile]
+    let valueArr = [DataManager.currentAccount().id, DataManager.currentAccount().username, DataManager.currentAccount().email, DataManager.currentAccount().mobile]
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "账号"
  
         setUpTableView()
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

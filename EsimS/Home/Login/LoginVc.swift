@@ -181,13 +181,20 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         agreeLabelAttri.yy_setTextHighlight(range, color: KBlueColor,
                                             backgroundColor: nil)
         { [weak self] (containerView, text, range, rect) in
-           self!.navigationController?.pushViewController(AgreementVc(), animated: true)
+           self!.presentAgreementVc()
         }
         //为文本设置属性
         agreeLabelAttri.yy_font = UIFont.systemFont(ofSize: 13)
         agreeLabel.attributedText = agreeLabelAttri
         agreeLabel.textAlignment = .center
         
+    }
+    
+    func presentAgreementVc() {
+        DispatchQueue.main.async { [weak self] in
+         
+            self!.present(UINavigationController(rootViewController: AgreementVc()), animated: true, completion: nil)
+        }
     }
 }
 

@@ -12,11 +12,8 @@ enum host: String {
     case local = "http://192.168.1.169:8081/api/"
     case test = "http://120.79.199.18:8082/api/"
     case online = "https://api.iotwoods.com/api/"
-    
 }
-
  
-
 let KStatusBarH = UIApplication.shared.statusBarFrame.height
 
 let KBackgroundColor = KColor(239, 239, 244, 1)

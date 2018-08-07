@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private func setRootViewCottroller() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-        window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible() 
         
         if DataManager.currentUserID().count > 0 {
             window?.rootViewController = MainTabBarVc()

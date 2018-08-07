@@ -16,7 +16,6 @@ class ChooseCountryVc: BaseVc, UISearchBarDelegate, UITableViewDelegate, UITable
     var tableView: UITableView!
     @objc func setUpTableView() {
         dataSource = processData(countries as! [Country])
-        
         tableView = UITableView(frame: CGRect(x: 0, y: searchBar.frame.maxY, width: KWidth, height: KHeight - searchBar.frame.maxY - KStatusBarH - (navigationController?.navigationBar.height)!))
         tableView.delegate = self
         tableView.dataSource = self

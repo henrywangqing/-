@@ -8,8 +8,12 @@
 
 import UIKit
 
+protocol FlowTableViewDelegate: NSObjectProtocol {
+    func flowTableViewHistoryBtnClicked()
+}
+
 class FlowTableView: UIView {
-    
+    weak var delegate: FlowTableViewDelegate?
     var backView: UIView!
     var card: Card!
     let sectorSpace: CGFloat = 0
@@ -95,7 +99,27 @@ class FlowTableView: UIView {
         setUpLbls()
         
         setAnimationCircle()
+        
+        setUpHistoryBtn()
     }
+    func setUpHistoryBtn() {
+        if card.flow > 0 {
+            let historyBtn = UIButton(frame: CGRect(x: width - 70, y: 10, width: 60, height: 25), title: "历史用量", titleColor: KBlueColor, backgroundColor: UIColor.white, fontsize: 12, target: self, selector: #selector(historyBtnClicked))
+            historyBtn.layer.cornerRadius = 10
+            historyBtn.layer.borderWidth = 0.5
+            historyBtn.layer.borderColor = KBlueColor.cgColor
+            addSubview(historyBtn)
+        }
+    }
+    
+    @objc func historyBtnClicked() {
+        if delegate != nil {
+            delegate!.flowTableViewHistoryBtnClicked()
+            
+        }
+    }
+    
+    
     func setAnimationCircle() {
         clearView = UIView(frame: CGRect(x: 0, y: 0, width: backH, height: backH))
         backView.addSubview(clearView)

@@ -24,30 +24,23 @@ extension NSString {
         }
     }
     
-    class func yyyyMMddFromString(_ string: String) -> String {
+    class func yyyyMMddFromString(_ timeStamp: String) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
         
-        let date = dateFormatter.date(from: string)
-        if date == nil {
-            return "2000-01-01"
-        }
+        let date = Date.init(timeIntervalSince1970:  (Double(timeStamp) ?? 0) * 0.001)
+        
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: date!)
+        return dateFormatter.string(from: date)
  
     }
-    class func yyyyMMddHHmmssFromString(_ string: String) -> String {
+    class func yyyyMMddHHmmssFromString(_ timeStamp: String) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+        let date = Date.init(timeIntervalSince1970: (Double(timeStamp) ?? 0) * 0.001)
         
-        let date = dateFormatter.date(from: string)
-        if date == nil {
-            return "2000-01-01 00:00:00"
-        }
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return dateFormatter.string(from: date!)
+        return dateFormatter.string(from: date)
         
     }
 }

@@ -22,6 +22,9 @@ class BaseVc: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = KBackgroundColor
     }
+    @objc func dismissSelf() {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
 
 }
 

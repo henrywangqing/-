@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardManagementVc: BaseVc {
+class CardManagementVc: BaseVc, FlowTableViewDelegate {
     
     let cellSpace: CGFloat = 5
     
@@ -142,6 +142,7 @@ class CardManagementVc: BaseVc {
     func setUpFlowTableView() {
         
         flowTableView = FlowTableView(frame: CGRect(x: 0, y: contentView.frame.maxY + 10, width: KWidth, height: 170), card: card)
+        flowTableView.delegate = self
 
         scrollView.addSubview(flowTableView)
         
@@ -153,11 +154,14 @@ class CardManagementVc: BaseVc {
         title = "卡片管理"
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(dismissSelf))
     }
+     
     
-    @objc func dismissSelf() {
-        navigationController?.dismiss(animated: true, completion: nil)
+//    MARK: FlowTableViewDelegate
+    func flowTableViewHistoryBtnClicked() {
+        let vc = FlowHistoryVc()
+        vc.sim_no = card.iccid
+        navigationController?.pushViewController(FlowHistoryVc(), animated: true)
     }
-    
 }
 
 

@@ -15,8 +15,13 @@ class AgreementVc: BaseVc {
         super.viewDidLoad()
         title = "用户协议"
         setUpWebView()
- 
+        setBarButton()
     }
+    func setBarButton() {
+        title = "卡片管理"
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(dismissSelf))
+    }
+    
     func setUpWebView() {
         
         self.automaticallyAdjustsScrollViewInsets = false

@@ -108,6 +108,9 @@
 		4356993120EB370700483930 /* AgreementVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993020EB370700483930 /* AgreementVc.swift */; };
 		4356993420EB438300483930 /* Useragreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 4356993320EB438300483930 /* Useragreement.html */; };
 		4356993820ECB11D00483930 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993720ECB11D00483930 /* UIImageExtension.swift */; };
+		4356993A210849D000483930 /* FlowHistoryVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43569939210849CF00483930 /* FlowHistoryVc.swift */; };
+		4356993E21086F9D00483930 /* FlowHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993D21086F9D00483930 /* FlowHistory.swift */; };
+		435699402108735500483930 /* MonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4356993F2108735500483930 /* MonthSelectorView.swift */; };
 		439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1ACB20A02FD50020345D /* AppDelegate.swift */; };
 		439C1AD620A02FD60020345D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439C1AD420A02FD60020345D /* LaunchScreen.storyboard */; };
 		439C1AE120A02FD60020345D /* EsimSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C1AE020A02FD60020345D /* EsimSTests.swift */; };
@@ -277,6 +280,9 @@
 		4356993020EB370700483930 /* AgreementVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVc.swift; sourceTree = "<group>"; };
 		4356993320EB438300483930 /* Useragreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Useragreement.html; sourceTree = "<group>"; };
 		4356993720ECB11D00483930 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		43569939210849CF00483930 /* FlowHistoryVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowHistoryVc.swift; sourceTree = "<group>"; };
+		4356993D21086F9D00483930 /* FlowHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowHistory.swift; sourceTree = "<group>"; };
+		4356993F2108735500483930 /* MonthSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorView.swift; sourceTree = "<group>"; };
 		439C1AC820A02FD50020345D /* EsimS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsimS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439C1ACB20A02FD50020345D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439C1AD220A02FD60020345D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -511,6 +517,7 @@
 			children = (
 				4309EF3420A95BFC00BBEB03 /* DataManager.swift */,
 				4345430A20DE4E2E00E75A35 /* ProgressHUD.swift */,
+				4356992E20EA1E3D00483930 /* ErrorManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -552,6 +559,7 @@
 				4306EF6320DB544E00A97ED0 /* FlowTableView.swift */,
 				432A8D8420C2660900EA66F0 /* PaymentConfirmView.swift */,
 				430872A720D3B51700AD375F /* PaymentResultView.swift */,
+				4356993F2108735500483930 /* MonthSelectorView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -565,6 +573,7 @@
 				430CFA0F20A3EB9400D7A1FF /* Account.swift */,
 				4309EF5420AC396B00BBEB03 /* Country.swift */,
 				43B0B66A20D0FF830071A7B1 /* Bill.swift */,
+				4356993D21086F9D00483930 /* FlowHistory.swift */,
 				4313AA4420E3774400508FCD /* Order.swift */,
 				43B0B67020D239990071A7B1 /* DashBoardInfo.swift */,
 			);
@@ -576,7 +585,6 @@
 			children = (
 				430CFA1A20A4537900D7A1FF /* API.swift */,
 				4313AA4820E6295300508FCD /* NetworkManager.swift */,
-				4356992E20EA1E3D00483930 /* ErrorManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -783,6 +791,7 @@
 				43B0B66620CF57600071A7B1 /* ConfirmPaymentVc.swift */,
 				4309AEE520C7BB1100EC81F3 /* CardInquiryVc.swift */,
 				4309AEFA20C7E7B200EC81F3 /* CardManagementVc.swift */,
+				43569939210849CF00483930 /* FlowHistoryVc.swift */,
 				4309AEFD20C8DFB300EC81F3 /* MyCardsVc.swift */,
 				4309EF5D20AEC30E00BBEB03 /* MyOrdersVc.swift */,
 				4313AA4620E381E900508FCD /* OrderDetailVc.swift */,
@@ -1035,6 +1044,7 @@
 				439C1ACC20A02FD50020345D /* AppDelegate.swift in Sources */,
 				4309AEFB20C7E7B200EC81F3 /* CardManagementVc.swift in Sources */,
 				4306EF2620DA575500A97ED0 /* MJRefreshBackStateFooter.m in Sources */,
+				4356993E21086F9D00483930 /* FlowHistory.swift in Sources */,
 				4309EF3520A95BFC00BBEB03 /* DataManager.swift in Sources */,
 				4309AEFE20C8DFB300EC81F3 /* MyCardsVc.swift in Sources */,
 				43B0B66920CF9EBE0071A7B1 /* NSStringExtension.swift in Sources */,
@@ -1066,6 +1076,7 @@
 				4356992D20E9F61600483930 /* DataExtension.swift in Sources */,
 				4306EF5F20DA5CE300A97ED0 /* JSONModel+networking.m in Sources */,
 				4309EF3F20AAB00100BBEB03 /* UIViewExtension.swift in Sources */,
+				435699402108735500483930 /* MonthSelectorView.swift in Sources */,
 				432A8D7F20C13E8200EA66F0 /* FourthVc.swift in Sources */,
 				4356992F20EA1E3E00483930 /* ErrorManager.swift in Sources */,
 				4306EF5820DA5CE300A97ED0 /* JSONKeyMapper.m in Sources */,
@@ -1078,6 +1089,7 @@
 				4306EF2820DA575500A97ED0 /* MJRefreshAutoStateFooter.m in Sources */,
 				4306EF5D20DA5CE300A97ED0 /* JSONHTTPClient.m in Sources */,
 				4306EF2420DA575500A97ED0 /* UIView+MJExtension.m in Sources */,
+				4356993A210849D000483930 /* FlowHistoryVc.swift in Sources */,
 				4309EF3820AA7BE200BBEB03 /* LoginVc.swift in Sources */,
 				4306EF2D20DA575500A97ED0 /* MJRefreshGifHeader.m in Sources */,
 				4306EF2020DA575500A97ED0 /* MJRefreshConst.m in Sources */,

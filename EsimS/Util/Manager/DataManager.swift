@@ -26,7 +26,7 @@ class DataManager: NSObject {
         var accounts = DataManager.accounts()
         var isIn = false
         for i in 0 ..< accounts.count {
-            if accounts[i].account == currentAccount.account {
+            if accounts[i].id == currentAccount.id {
                 isIn = true
                 accounts[i] = currentAccount
                 accounts.swapAt(i, 0)
@@ -38,7 +38,7 @@ class DataManager: NSObject {
             accounts.swapAt(0, accounts.count - 1)
         }
         
-        UserDefaults().set(currentAccount.account, forKey: KCurrentUserID)
+        UserDefaults().set(currentAccount.id, forKey: KCurrentUserID)
         UserDefaults().synchronize()
         NSKeyedArchiver.archiveRootObject(currentAccount.toJSONString()!, toFile: CurrentAccountPath)
         

@@ -9,7 +9,7 @@ import HandyJSON
 
 struct Account: HandyJSON {
     var token: String = ""
-    var account: String = ""
+    var id: String = ""
     var username: String = ""
     var email: String = ""
     var mobile: String = ""

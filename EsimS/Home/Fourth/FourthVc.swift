@@ -54,7 +54,7 @@ class FourthVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
  
             if indexPath.row == 0 {
-                cell.detailTextLabel?.text = DataManager.currentAccount().account
+                cell.detailTextLabel?.text = DataManager.currentAccount().id
             }
             if indexPath.row != 2 {
                 cell.accessoryType = .disclosureIndicator

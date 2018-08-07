@@ -12,7 +12,7 @@ import Moya
 // 请求成功的回调
 typealias successCallback = (_ result: Any) -> Void
 // 请求失败的回调
-typealias failureCallback = (_ error: Any) -> Void
+typealias failureCallback = (_ error: MyError) -> Void
 
 let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<APIService>.RequestResultClosure) in
     do {
@@ -53,24 +53,46 @@ struct APITool {
                         {
                         success(successResult)
                         return
-    
                     }
-                    else if let dic = data as? NSDictionary,
+                    if let dic = data as? NSDictionary,
                         let message = dic["message"] as? String,
                         let code = dic["code"] as? Int {
-                        manageError(code: code, message: message)
+                        
+                        var myError = MyError()
+                        myError.code = code
+                        myError.message = message
+                        manageError(myError)
+                        failure(myError)
+                        return
                     }
-                    failure(data)
+                    
+                    var myError = MyError()
+                    myError.code = KFormatterErrorCode
+                    myError.message = Mystring("服务器返回数据格式错误")
+                    manageError(myError)
+                    failure(myError)
+                    print("服务器返回数据格式错误", data)
+                    
                 } catch {
                     let error = MoyaError.jsonMapping(moyaResponse)
-                    ProgressHUD.showError(withStatus: error.errorDescription)
-                    failure(error)
+                    
+                    var myError = MyError()
+                    myError.code = KNetErrorCode
+                    myError.message = error.errorDescription ?? ""
+                    manageError(myError)
+                    failure(myError)
+                    
                 }
                 break
             case let .failure(error):
                 ProgressHUD.dismiss()
-                ProgressHUD.showError(withStatus: error.errorDescription)
-                failure(error)
+               
+                var myError = MyError()
+                myError.code = KNetErrorCode
+                myError.message = error.errorDescription ?? ""
+                manageError(myError)
+                failure(myError)
+                
                 break
             }
         }
@@ -91,12 +113,13 @@ enum APIService {
     case logout(token: String)
     case getRenewedCardInfo(simNoList:[Any], sim_type: Int, month: Int, pageNumber:Int, pageSize:Int)
     case submitOrder(simNoList:[Any], month: Int)
-    case confirmOrder(simNoList:[Any], order_id: String, sum_fee: Double, pay_type: Int, pay_status: Bool)
+    case confirmOrder(order_id: String, pay_type: Int)
     case dashBoardInfo
     case singleCardInquiry(sim_no: String)
     case cardListInquiry(pageNumber: Int, pageSize: Int)
     case orderListInquiry(pageNumber: Int, pageSize: Int)
     case refreshCardInfo(iccid: String)
+    case inquiryHistoryUse(sim_no: String)
 }
 
 extension APIService: TargetType {
@@ -104,7 +127,7 @@ extension APIService: TargetType {
     public var baseURL: URL {
         return URL(string: host.online.rawValue)!
     }
-// bema_test Bema_test123
+
     public var path: String {
         switch self {
         case .login:
@@ -117,7 +140,7 @@ extension APIService: TargetType {
             return "app/chargeList"
         case .submitOrder( _, _):
             return "app/orderInfo"
-        case .confirmOrder( _, _, _, _, _):
+        case .confirmOrder( _, _):
             return "app/createOrder"
         case .dashBoardInfo:
             return "app/dashBoardInfo"
@@ -129,6 +152,8 @@ extension APIService: TargetType {
             return "app/getOrderList"
         case .refreshCardInfo(_):
             return "app/refreshSimInfo"
+        case .inquiryHistoryUse(_):
+            return "utils/getMonthUse"
         }
     }
     
@@ -144,7 +169,7 @@ extension APIService: TargetType {
             return .post
         case .submitOrder( _, _):
             return .post
-        case .confirmOrder( _, _, _, _, _):
+        case .confirmOrder( _, _):
             return .post
         case .dashBoardInfo:
             return .get
@@ -155,6 +180,8 @@ extension APIService: TargetType {
         case .orderListInquiry(_, _):
             return .post
         case .refreshCardInfo(_):
+            return .post
+        case .inquiryHistoryUse(_):
             return .post
         }
     }
@@ -171,8 +198,8 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["simNoList": simNoList, "sim_type": sim_type, "month": month, "pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         case .submitOrder(let simNoList, let month):
             return .requestParameters(parameters: ["simNoList": simNoList, "month": month], encoding: JSONEncoding.default)
-        case .confirmOrder(let simNoList, let order_id, let sum_fee, let pay_type, let pay_status):
-            return .requestParameters(parameters: ["simNoList": simNoList, "order_id": order_id, "sum_fee": sum_fee, "pay_type": pay_type, "pay_status": pay_status], encoding: JSONEncoding.default)
+        case .confirmOrder(let order_id, let pay_type):
+            return .requestParameters(parameters: ["order_id": order_id, "pay_type": pay_type], encoding: JSONEncoding.default)
         case .dashBoardInfo:
             return .requestPlain
         case .singleCardInquiry(let sim_no): 
@@ -183,6 +210,8 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["pageNumber": pageNumber, "pageSize": pageSize], encoding: JSONEncoding.default)
         case .refreshCardInfo(let iccid):
             return .requestParameters(parameters: ["iccid": iccid], encoding: JSONEncoding.default)
+        case .inquiryHistoryUse(let sim_no):
+            return .requestParameters(parameters: ["sim_no": sim_no], encoding: JSONEncoding.default)
         }
     }
     

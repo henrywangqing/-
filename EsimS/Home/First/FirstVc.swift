@@ -13,7 +13,7 @@ class FirstVc: BaseVc {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        
+         
     }
     var dashBoardInfo = DashBoardInfo()
     var titleArr = [String]()
@@ -37,7 +37,7 @@ class FirstVc: BaseVc {
     //        MARK:数据
     func setUpAccountInfoData() {
         
-        titleArr = ["账号名称","注册日期","账号余额",
+        titleArr = ["公司名称","注册日期","账号余额",
                         "佣金余额","api key"]
         
         valueArr = ["\(dashBoardInfo.baseInfo.account)","\(NSString.yyyyMMddFromString(dashBoardInfo.baseInfo.create_time))","¥\(String(format: "%.2f", dashBoardInfo.baseInfo.balance))","¥\(String(format: "%.2f", dashBoardInfo.baseInfo.commission))", "\(dashBoardInfo.baseInfo.appkey)"]
