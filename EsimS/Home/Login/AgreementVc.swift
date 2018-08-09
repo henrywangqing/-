@@ -18,7 +18,6 @@ class AgreementVc: BaseVc {
         setBarButton()
     }
     func setBarButton() {
-        title = "卡片管理"
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(dismissSelf))
     }
     

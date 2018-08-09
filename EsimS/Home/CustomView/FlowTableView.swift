@@ -109,6 +109,7 @@ class FlowTableView: UIView {
             historyBtn.layer.borderWidth = 0.5
             historyBtn.layer.borderColor = KBlueColor.cgColor
             addSubview(historyBtn)
+            historyBtn.isHidden = true
         }
     }
     

@@ -186,8 +186,7 @@ class LoginVc: BaseVc, UITextFieldDelegate, UITableViewDelegate, UITableViewData
         //为文本设置属性
         agreeLabelAttri.yy_font = UIFont.systemFont(ofSize: 13)
         agreeLabel.attributedText = agreeLabelAttri
-        agreeLabel.textAlignment = .center
-        
+        agreeLabel.textAlignment = .center 
     }
     
     func presentAgreementVc() {

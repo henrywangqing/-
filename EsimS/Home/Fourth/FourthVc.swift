@@ -19,11 +19,7 @@ class FourthVc: BaseVc, UITableViewDelegate, UITableViewDataSource {
         title = Mystring("设置")
         
         setUpTableView()
-        
-        let img = UIImage.init(named: "设置")
-        let img2 = img?.imageWithTintColor(color: KColor(153, 153, 153, 1))
-        UIImageWriteToSavedPhotosAlbum(img2!, nil, nil, nil)
-        
+       
     }
     
     func setUpTableView() {
